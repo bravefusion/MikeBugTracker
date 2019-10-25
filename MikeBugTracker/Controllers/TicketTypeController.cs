@@ -46,7 +46,7 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Description")] TicketTypes ticketTypes)
+        public ActionResult Create([Bind(Include = "Id,TypeName,Description")] TicketTypes ticketTypes)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Description")] TicketTypes ticketTypes)
+        public ActionResult Edit([Bind(Include = "Id,TypeName,Description")] TicketTypes ticketTypes)
         {
             if (ModelState.IsValid)
             {

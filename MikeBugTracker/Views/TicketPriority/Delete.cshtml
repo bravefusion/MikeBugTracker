@@ -1,4 +1,4 @@
-﻿@model MikeBugTracker.Models.TicketStatus
+﻿@model MikeBugTracker.Models.TicketPriorities
 
 @{
     ViewBag.Title = "Delete";
@@ -8,15 +8,15 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>TicketStatus</h4>
+    <h4>TicketPriorities</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.PriorityName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserId)
+            @Html.DisplayFor(model => model.PriorityName)
         </dd>
 
         <dt>
