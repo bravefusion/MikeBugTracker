@@ -201,7 +201,11 @@
   <ItemGroup>
     <Content Include="Content\adminlte.min.css" />
     <Content Include="Content\all.min.css" />
+    <Content Include="Content\daterangepicker.css" />
     <Content Include="Content\icheck-bootstrap.min.css" />
+    <Content Include="Content\OverlayScrollbars.min.css" />
+    <Content Include="Content\summernote-bs4.css" />
+    <Content Include="Content\tempusdominus-bootstrap-4.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
