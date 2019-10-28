@@ -48,7 +48,7 @@ namespace MikeBugTracker.Helpers
         public ICollection<ApplicationUser> UsersNotInRole(string roleName)
         {
             var resultList = new List<ApplicationUser>();
-            var List  userManager.Users.ToList();
+            var List =  userManager.Users.ToList();
             foreach (var user in List)
             {
                 if (!IsUserInRole(user.Id, roleName))

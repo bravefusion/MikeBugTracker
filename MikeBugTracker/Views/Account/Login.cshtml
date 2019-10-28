@@ -43,17 +43,21 @@
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                <div class="input-group mb-3">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <input type="email" name="Email" class="form-control" placeholder="Email">
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
-            </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="input-group mb-3">
-                        <input type="password" name="Password" class="form-control" placeholder="Password">
+
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -91,11 +95,13 @@
                     <p class="mb-1">
                         <a href="#">I forgot my password</a>
                     </p>
-                }
+
                 <p class="mb-0">
-                    @*<a href="register.html" class="text-center">Register a new membership</a>*@
+                    <a href=@Url.Action("Register","Account") class="text-center">Register a new membership</a>
                 </p>
+                }
             </div>
+                
             <!-- /.login-card-body -->
         </div>
     </div>
