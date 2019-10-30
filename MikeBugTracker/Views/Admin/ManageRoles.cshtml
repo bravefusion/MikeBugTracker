@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ManageRoles";
+}
+
+<h2>ManageRoles</h2>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.ListBox("Users", null, new { @class="cntrlbtnWide"})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.DropDownList("Role", null,"--Select Role--", new { @class="cntrlbtnWide"})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-12">Multi Select List</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">Select List</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">Button</div>
+        </div>
+    </div>
+</div>

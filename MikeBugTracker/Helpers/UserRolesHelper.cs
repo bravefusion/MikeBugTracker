@@ -23,9 +23,9 @@ namespace MikeBugTracker.Helpers
         {
             return userManager.GetRoles(userId);
         }
-        public bool AddUserToRole(string UserID, string roleName)
+        public bool AddUserToRole(string userId, string roleName)
         {
-            var result = userManager.AddToRole(UserID, roleName);
+            var result = userManager.AddToRole(userId, roleName);
             return result.Succeeded;
         }
         public bool RemoveUserFromRole(string userId, string roleName)

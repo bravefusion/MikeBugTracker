@@ -60,58 +60,6 @@ namespace MikeBugTracker.Helpers
         public ICollection<ApplicationUser> UsersNotOnProject(int projectId)
         {
             return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
-        }
-
-        public class UserProjectsHelper
-        {
-            private UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(new
-                UserStore<ApplicationUser>(new ApplicationDbContext()));
-            private ApplicationDbContext db = new ApplicationDbContext();
-            public bool IsOnProject(string userId, int projectId)
-            {
-                if(db.Projects.Find(projectId).Users.Contains(db.Users.Find(userId)))
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        public void AddUsersToProject(string userId, int projectId)
-        {
-            if(!IsUserOnProject(userId, projectId))
-            {
-                var project = db.Projects.Find(projectId);
-                project.Users.Add(db.Users.Find(userId));
-                db.Entry(project).State = EntityState.Modified;//just saves this obj instance
-                db.SaveChanges();
-            }
-        }
-
-        public void RemoveUsersFromProject(string userId, int projectId)
-        {
-            if(IsUserOnProject(userId, projectId))
-            {
-                var project = db.Projects.Find(projectId);
-                project.Users.Remove(db.Users.Find(userId));
-                db.Entry(project).State = EntityState.Modified;//just save this obj instance
-                db.SaveChanges();
-            }
-        }
-
-        public ICollection<ApplicationUser>ListUsersOnProject(int projectId)
-        {
-            return db.Projects.Find(projectId).Users;
-        }
-
-        public ICollection<Project>ListProjectsForUser(string userId)
-        {
-            return db.Users.Find(userId).Projects;
-        }
-
-        public ICollection<ApplicationUser>ListUsersNotOnProject(int projectId)
-        {
-            return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
-        }
+        }       
     }
 }
