@@ -10,43 +10,75 @@ namespace MikeBugTracker.Controllers
 {
     public class AdminController : Controller
     {
+        
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserRolesHelper rolesHelper = new UserRolesHelper();
         // GET: Admin
         public ActionResult ManageRoles()
         {
             ViewBag.Users = new MultiSelectList(db.Users,"Id","Email");
             ViewBag.Role = new SelectList(db.Roles,"Name","Name");
 
-            return View();
+            var users = new List<ManageRolesViewModel>(); 
+            foreach(var user in db.Users.ToList())
+            {
+                users.Add(new ManageRolesViewModel
+                {
+                    UserName = $"{user.LastName},{user.FirstName}"
+                });
+            }
+
+            return View(users);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ManageRoles(List<string> users, string role)
+        public ActionResult ManageRoles(List<string> usersIds, string role)
         {
-            return RedirectToAction("Index","Home");
+            //Uneneroll all the selected Users from ANY 
+            //roles they may current occupy
+            foreach(var userId in usersIds)
+            {
+                var userRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
+                if(userRole != null)
+                {
+                    rolesHelper.RemoveUserFromRole(userId, userRole);
+                }
+            }
+
+            //Step 2:Add them back to the selected Role
+            if(! string.IsNullOrEmpty(role))
+            {
+                foreach (var userId in usersIds)
+                {
+                    rolesHelper.AddUserToRole(userId, role);
+                }
+            }
+            
+
+            return RedirectToAction("ManageRoles","Admin");
         }
 
         public ActionResult EditUser(string id)
         {
             var user = db.Users.Find(id);
-            AdminUser AdminModel = new AdminUser();
+            var adminModel = new AdminUser();
             UserRolesHelper helper = new UserRolesHelper();
             var selected = helper.ListUserRoles(id);
-            AdminModel.Roles = new MultiSelectList(db.Roles, "Name", "Name", selected);
-            AdminModel.Id = user.Id;
-            AdminModel.Name = user.DisplayName;
+            adminModel.Roles = new MultiSelectList(db.Roles, "Name", "Name", selected);
+            adminModel.User.Id = user.Id;
+            adminModel.User.DisplayName = user.DisplayName;
 
-            return View(AdminModel);
+            return View(adminModel);
         }
 
         public ActionResult EditUser(AdminUser model)
         {
-            var user = db.Users.Find(model.id);
+            var user = db.Users.Find(model.User.Id);
             UserRolesHelper helper = new UserRolesHelper();
             foreach(var rolemv in db.Roles.Select(r=>r.Id).ToList())
             {
-                helper.RemoveUserFromRole(user.Id, rolermv);
+                helper.RemoveUserFromRole(user.Id, rolemv);
             }
             foreach(var roleadd in db.Roles.Select(r => r.Id).ToList())
             {

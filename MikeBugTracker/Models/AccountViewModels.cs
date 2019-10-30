@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MikeBugTracker.Models
 {
+    public class ManageRolesViewModel
+    {
+        public string UserName { get; set; }
+        public string RoleName { get; set; }
+    }
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
