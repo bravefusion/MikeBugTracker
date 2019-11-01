@@ -122,4 +122,11 @@ namespace MikeBugTracker.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class UserProjectListViewModel
+    {
+        public string Name { get; set; }
+        public List<string> ProjectNames { get; set; }
+
+    }
 }

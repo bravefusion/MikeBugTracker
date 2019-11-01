@@ -3,74 +3,96 @@
     ViewBag.Title = "ManageRoles";
 }
 
-<h2>ManageRoles</h2>
+<style>
+    .cntrlWide{
+        width: 100%;
+    }
+</style>
 
-<div class="row">
-    <div class="col-md-6">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="row">
-                <div class="col-md-12">
-                    @Html.ListBox("UsersIds", null, new { @class="cntrlWide"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    @Html.DropDownList("Role", null,"--Select Role--", new { @class="cntrlWide"})
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
-                </div>
-            </div>
-        }
 
-        <div class="row">
-            <div class="col-md-12">Multi Select List</div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">Select List</div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">Button</div>
-        </div>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Manage Roles</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Manage Roles</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-    <div class="col-md-6">
-        <table class="table">
-            <tr>
-                <th>
-                    
-                    @Html.DisplayName("User Name")
-                </th>
-                <th>
-                    @Html.DisplayName("Role")
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>                       
-                        @Html.DisplayFor(model => user.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => user.RoleName)
-                    </td>
-                    <td>
-                       
-                    </td>
-                </tr>
-            }
-
-        </table>
+    
+    <!-- /.content-header -->
+   
+        <div class="row">
+            <div class="col-md-6">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.ListBox("UsersIds", null, new { @class = "cntrlWide" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.DropDownList("Role", null, "--Select Role--", new { @class = "cntrlWide" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
+                        </div>
+                    </div>
+                }
+            </div>
 
 
 
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th>
+
+                            @Html.DisplayName("User Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Role")
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => user.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => user.RoleName)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
 
 
 
-    </div>
+
+
+
+
+            </div>
+        </div>
 </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
