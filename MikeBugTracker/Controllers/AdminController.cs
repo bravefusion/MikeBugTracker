@@ -25,7 +25,8 @@ namespace MikeBugTracker.Controllers
             {
                 users.Add(new ManageRolesViewModel
                 {
-                    UserName = $"{user.LastName},{user.FirstName}"
+                    UserName = $"{user.LastName},{user.FirstName}",
+                    RoleName = rolesHelper.ListUserRoles(user.Id).FirstOrDefault()
                 });
             }
 

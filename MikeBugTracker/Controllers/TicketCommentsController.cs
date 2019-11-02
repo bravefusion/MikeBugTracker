@@ -53,6 +53,7 @@ namespace MikeBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticketComments.Created = DateTime.Now;
                 db.TicketComments.Add(ticketComments);
                 db.SaveChanges();
                 return RedirectToAction("Index");

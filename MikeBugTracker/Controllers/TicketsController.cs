@@ -42,9 +42,9 @@ namespace MikeBugTracker.Controllers
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
-            ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "UserId");
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "UserId");
-            ViewBag.TicketTypesId = new SelectList(db.TicketTypes, "Id", "UserId");
+            ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "PriorityName");
+            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "StatusName");
+            ViewBag.TicketTypesId = new SelectList(db.TicketTypes, "Id", "TypeName");
             return View();
         }
 
@@ -57,6 +57,7 @@ namespace MikeBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticket.Created = DateTime.Now;
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -65,9 +66,9 @@ namespace MikeBugTracker.Controllers
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
-            ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "UserId", ticket.TicketPrioritiesId);
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "UserId", ticket.TicketStatusId);
-            ViewBag.TicketTypesId = new SelectList(db.TicketTypes, "Id", "UserId", ticket.TicketTypesId);
+            ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "PriorityName", ticket.TicketPrioritiesId);
+            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "StatusName", ticket.TicketStatusId);
+            ViewBag.TicketTypesId = new SelectList(db.TicketTypes, "Id", "TypeName", ticket.TicketTypesId);
             return View(ticket);
         }
 
