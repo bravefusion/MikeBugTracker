@@ -115,6 +115,7 @@ namespace MikeBugTracker.Controllers
                     {
                         projHelper.AddUserToProject(projectManagerId, projectId);          
                     }
+                    
                     if (developers != null)
                     {
                         foreach (var developerId in developers)
@@ -122,6 +123,7 @@ namespace MikeBugTracker.Controllers
                             projHelper.AddUserToProject(developerId, projectId);
                         }
                     }
+                    
                     if (submitters != null)
                     {
                         foreach (var submitterId in submitters)

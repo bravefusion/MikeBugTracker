@@ -12,6 +12,18 @@ namespace MikeBugTracker.Helpers
     public class ProjectsHelper
     {
         ApplicationDbContext db = new ApplicationDbContext();
+        private UserRolesHelper rolesHelper = new UserRolesHelper();
+
+        public List<string> ListUsersOnProjectInRole(int projectId, string roleName)
+        {
+            var userIdList = new List<string>();
+            foreach(var user in UsersOnProject(projectId))
+            {
+                if (rolesHelper.IsUserInRole(user.Id, roleName))
+                    userIdList.Add(user.Id);
+            }
+            return userIdList;
+        }
         
         public bool IsUserOnProject(string userId, int projectId)
         {
