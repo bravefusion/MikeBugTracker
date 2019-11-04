@@ -1,9 +1,13 @@
 ﻿@model IEnumerable<MikeBugTracker.Models.UserProjectListViewModel>
 @{
-    ViewBag.Title = "Manage Project Users";
+    ViewBag.Title = "ManageProjectUsers";
 }
 
-
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -28,7 +32,7 @@
             @Html.AntiForgeryToken()
 
             <div class="col-md-4">
-                @Html.ListBox("Projcts", null, new {  @class= "form-control"})
+                @Html.ListBox("Projects", null, new {  @class= "form-control"})
             </div>
 
             <div class="col-md-2 col-md-offset-1">
