@@ -6,13 +6,73 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MikeBugTracker.Helpers;
 using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserRolesHelper rolesHelper = new UserRolesHelper();
+        private ProjectsHelper projHelper = new ProjectsHelper();
+
+        public ActionResult ManageUsers(int id)
+        {
+            ViewBag.ProjectId = id;
+
+            #region PM section
+            var pmId = projHelper.ListUsersOnProjectInRole(id, "Project_Manager").FirstOrDefault();
+            ViewBag.ProjectManagerId = new SelectList(rolesHelper.UsersInRole("Project_Manager"), "Id", "Email", pmId);
+            #endregion
+
+            #region Dev Section
+            ViewBag.Developers = new MultiSelectList(rolesHelper.UsersInRole("Developer"), "Id", "Email", projHelper.ListUsersOnProjectInRole(id, "Developer"));
+            #endregion
+
+            #region Sub Section
+            ViewBag.Submitters = new MultiSelectList(rolesHelper.UsersInRole("Submitter"), "Id", "Email", projHelper.ListUsersOnProjectInRole(id, "Submitter"));
+            #endregion
+
+            return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageUsers(int projectId, string projectManagerId, List<string> developers, List<string> submitters)
+        {
+            foreach(var user in projHelper.UsersOnProject(projectId).ToList())
+            {
+                projHelper.RemoveUserFromProject(user.Id, projectId);
+            }
+
+            //In order to ensure that I always have the correct and current set of assign users
+            //I will first remove all users from the project and then I will add back the selected users
+            if (!string.IsNullOrEmpty(projectManagerId))
+            {
+                projHelper.AddUserToProject(projectManagerId, projectId);
+            }
+
+            if (developers != null)
+            {
+                foreach (var developerId in developers)
+                {
+                    projHelper.AddUserToProject(developerId, projectId);
+                }
+            }
+
+            if (submitters != null)
+            {
+                foreach (var submitterId in submitters)
+                {
+                    projHelper.AddUserToProject(submitterId, projectId);
+                }
+            }
+            return RedirectToAction("ManageUsers", new { id = projectId });
+        }
+
 
         // GET: Projects
         public ActionResult Index()
