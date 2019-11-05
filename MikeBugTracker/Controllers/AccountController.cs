@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MikeBugTracker.Helpers;
 using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
@@ -149,6 +150,8 @@ namespace MikeBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            UserRolesHelper helper = new UserRolesHelper();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser 
@@ -156,11 +159,14 @@ namespace MikeBugTracker.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     UserName = model.Email, 
-                    Email = model.Email 
+                    Email = model.Email ,
+                    DisplayName = $"{model.FirstName} {model.LastName}"
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    helper.AddUserToRole(user.Id, "Submitter");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

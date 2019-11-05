@@ -17,7 +17,7 @@ namespace MikeBugTracker.Controllers
         // GET: Admin
         public ActionResult ManageRoles()
         {
-            ViewBag.UsersIds = new MultiSelectList(db.Users, "Id", "Email");
+            ViewBag.UsersIds = new MultiSelectList(db.Users, "Id", "DisplayName");
             ViewBag.Role = new SelectList(db.Roles, "Name", "Name");
 
             var users = new List<ManageRolesViewModel>();
@@ -67,12 +67,12 @@ namespace MikeBugTracker.Controllers
         public ActionResult ManageProjectUsers()
         {
             ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
-            ViewBag.Developers = new MultiSelectList(rolesHelper.UsersInRole("Developer"), "Id", "Email");
-            ViewBag.Submitters = new MultiSelectList(rolesHelper.UsersInRole("Submitter"), "Id", "Email");
+            ViewBag.Developers = new MultiSelectList(rolesHelper.UsersInRole("Developer"), "Id", "DisplayName");
+            ViewBag.Submitters = new MultiSelectList(rolesHelper.UsersInRole("Submitter"), "Id", "DisplayName");
 
             if (User.IsInRole("Admin"))
             {
-                ViewBag.ProjectManagerId = new SelectList(rolesHelper.UsersInRole("Project_Manager"), "Id", "Email");
+                ViewBag.ProjectManager = new SelectList(rolesHelper.UsersInRole("Project_Manager"), "Id", "DisplayName");
             }
             //Lets create a View Model for purposes of displaying User's and their associated Projects
             var myData = new List<UserProjectListViewModel>();

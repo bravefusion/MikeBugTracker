@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
@@ -17,7 +18,21 @@ namespace MikeBugTracker.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriorities).Include(t => t.TicketStatus).Include(t => t.TicketTypes);
+
+            var tickets = db.Tickets;
+            var userId = User.Identity.GetUserId();
+
+            if (User.IsInRole("Developer"))
+            {
+                var devTickets = tickets.Where(t => t.AssignedToUserId == userId);
+                return View(devTickets.ToList());
+            }
+            else if (User.IsInRole("Submitter"))
+            {
+                var subTickets = tickets.Where(t => t.OwnerUserId == userId);
+                return View(subTickets.ToList());
+            }
+            
             return View(tickets.ToList());
         }
 
