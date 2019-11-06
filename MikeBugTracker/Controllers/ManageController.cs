@@ -15,6 +15,7 @@ namespace MikeBugTracker.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -73,6 +74,28 @@ namespace MikeBugTracker.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        public ActionResult EditProfile(string userId)
+        {
+            var user = db.Users.Find(userId);
+            var userVM = new UserProfileViewModel();
+            userVM.FirstName = user.FirstName;
+            userVM.LastName = user.LastName;
+            return View(userVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult EditProfile(UserProfileViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            db.SaveChanges();
+            return RedirectToAction("EditProfile", new { userId});
         }
 
         //

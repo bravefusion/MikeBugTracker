@@ -14,6 +14,12 @@ namespace MikeBugTracker.Models
         public bool BrowserRemembered { get; set; }
     }
 
+    public class UserProfileViewModel
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

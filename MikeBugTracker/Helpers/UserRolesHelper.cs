@@ -16,7 +16,7 @@ namespace MikeBugTracker.Helpers
 
         public bool IsUserInRole(string userId, string roleName)
         {
-            ;
+            
             return userManager.IsInRole(userId, roleName);
         }
         public ICollection<string> ListUserRoles(string userId)
