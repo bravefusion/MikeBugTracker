@@ -115,14 +115,30 @@
                     @Html.AntiForgeryToken()
                     @Html.Hidden("TicketId", Model.Id)
                     <div class="row">
-                        <div class="col-lg">
-                            @Html.TextArea("Comments", new { rows = 5, cols = 50, placeholder = "Attachment file" })
+                        <div class="col-md-12">
+                            <div class="col-lg">
+                                @Html.TextArea("Comments", new { rows = 5, cols = 50, placeholder = "Attachment file" })
+                            </div>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-lg">
                             <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
                         </div>
+                    </div>
+
+                    <div class="from-group">
+                        @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+                        {
+                            <div>
+                                <h4>@comment.User.FirstName</h4>
+                                <div class="media-body">
+                                    @comment.CommentBody
+                                </div>
+                            </div>
+                        }
+
                     </div>
                 }
             </div>

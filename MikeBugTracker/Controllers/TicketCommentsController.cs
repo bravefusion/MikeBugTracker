@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
@@ -54,6 +55,7 @@ namespace MikeBugTracker.Controllers
             if (ModelState.IsValid)
             {
                 ticketComments.Created = DateTime.Now;
+                ticketComments.UserId = User.Identity.GetUserId();
                 db.TicketComments.Add(ticketComments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
