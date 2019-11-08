@@ -1,6 +1,13 @@
 ﻿
 @model MikeBugTracker.Models.UserProfileViewModel
 @using Microsoft.AspNet.Identity
+@using MikeBugTracker.Models
+@{
+    var db = new ApplicationDbContext();
+    var userId = User.Identity.GetUserId();
+    var user = db.Users.Find(userId);
+}
+
 
 
 
@@ -13,140 +20,138 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 
 <!-- Content Wrapper. Contains page content -->
-
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Profile</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
-                    </ol>
-                </div>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Profile</h1>
             </div>
-        </div><!-- /.container-fluid -->
-    </section>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">User Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3">
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
 
-                    <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle"
-                                     src="../../dist/img/user4-128x128.jpg"
-                                     alt="User profile picture">
-                            </div>
-
-                            <h3 class="profile-username text-center"></h3>
-
-                            <p class="text-muted text-center">Software Engineer</p>
-
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>Total Assigned Tickets</b> <a class="float-right">1,322</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Total Assigned Projects</b> <a class="float-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Notifications</b> <a class="float-right">13,287</a>
-                                </li>
-                            </ul>
-
-                            <a href=@Url.Action("ChangePassword","Manage") class="btn btn-primary btn-block"><b>Change Password</b></a>
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="@user.Avatar"
+                                 alt="User profile picture">
                         </div>
-                        <!-- /.card-body -->
+
+                        <h3 class="profile-username text-center"></h3>
+
+                        <p class="text-muted text-center">Software Engineer</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Total Assigned Tickets</b> <a class="float-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Total Assigned Projects</b> <a class="float-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Notifications</b> <a class="float-right">13,287</a>
+                            </li>
+                        </ul>
+
+                        <a href=@Url.Action("ChangePassword","Manage") class="btn btn-primary btn-block"><b>Change Password</b></a>
                     </div>
-                    <!-- /.card -->
-
-
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.col -->
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header p-2">
-                            <ul class="nav nav-pills">
-                                <li class="nav-item"><a class="nav-link active" href="#nameSet" data-toggle="tab">Name Settings</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#avaSet" data-toggle="tab">Avatar Settings</a></li>
-                            </ul>
-                        </div><!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="active tab-pane" id="nameSet">
-                                    <div class="tab-pane" id="settings">
-                                        @using (Html.BeginForm())
-                                        {@Html.AntiForgeryToken()
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                            <div class="col-sm-10">
-                                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="inputName2" class="col-sm-2 col-form-label">LastName</label>
-                                            <div class="col-sm-10">
-                                                @Html.TextBoxFor(model => model.LastName, new { @class = "form -control" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="offset-sm-2 col-sm-10">
-                                                <button type="submit" class="btn btn-danger">Submit</button>
-                                            </div>
-                                        </div>
-                                    }
+                <!-- /.card -->
 
 
-                                    </div>
-                                    <!-- /.post -->
-                                </div>
-
-                                <div class="tab-pane" id="avaSet">
-                                    @using (Html.BeginForm("EditProfile", "Manage", FormMethod.Post, new { @enctype = "Multipart/form-data" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                            <div class="col-sm-10">
-                                                @*@Html.TextBoxFor(m => m.Avatar, new { @class = "form-control", type = "file", name = "image" })*@
-                                                <input type="file" name="image" class="form-control" id="inputName" placeholder="Avatar">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="offset-sm-2 col-sm-10">
-                                                <button type="submit" class="btn btn-success">Submit</button>
-                                            </div>
-                                        </div>
-
-                                    }
-
-
-                                </div>
-                                <!-- /.tab-pane -->
-                            </div>
-                            <!-- /.tab-content -->
-                        </div><!-- /.card-body -->
-                    </div>
-                    <!-- /.nav-tabs-custom -->
-                </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#nameSet" data-toggle="tab">Name Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#avaSet" data-toggle="tab">Avatar Settings</a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="nameSet">
+                                <div class="tab-pane" id="settings">
+                                    @using (Html.BeginForm())
+                                    {@Html.AntiForgeryToken()
+                                    <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group row">
+                                        <label for="inputName2" class="col-sm-2 col-form-label">LastName</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form -control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                        </div>
+                                    </div>
+                                }
+
+
+                                </div>
+                                <!-- /.post -->
+                            </div>
+
+                            <div class="tab-pane" id="avaSet">
+                                @using (Html.BeginForm("EditProfile", "Manage", FormMethod.Post, new { @enctype = "Multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            @*@Html.TextBoxFor(m => m.Avatar, new { @class = "form-control", type = "file", name = "image" })*@
+                                            <input type="file" name="image" class="form-control" id="inputName" placeholder="Avatar">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                }
+
+
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 <!-- /.content-wrapper -->
 @*<div>
         <h4>Change your account settings</h4>
