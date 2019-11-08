@@ -228,6 +228,8 @@
     <Content Include="Scripts\sparkline.js" />
     <Content Include="Scripts\summernote-bs4.min.js" />
     <Content Include="Scripts\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Uploads\csharp.png" />
+    <Content Include="Uploads\Fake Portfolio pic.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -310,7 +312,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

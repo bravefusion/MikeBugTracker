@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MikeBugTracker.Helpers;
 using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
@@ -33,9 +35,9 @@ namespace MikeBugTracker.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -76,26 +78,44 @@ namespace MikeBugTracker.Controllers
             return View(model);
         }
 
-        public ActionResult EditProfile(string userId)
+        public ActionResult EditProfile()
         {
+            var userId = User.Identity.GetUserId();
             var user = db.Users.Find(userId);
             var userVM = new UserProfileViewModel();
             userVM.FirstName = user.FirstName;
             userVM.LastName = user.LastName;
+            userVM.Avatar = user.Avatar;
             return View(userVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult EditProfile(UserProfileViewModel model)
+        public ActionResult EditProfile(UserProfileViewModel model, HttpPostedFileBase image)
         {
             var userId = User.Identity.GetUserId();
             var user = db.Users.Find(userId);
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
+            if (model.FirstName != null)
+            {
+                user.FirstName = model.FirstName;
+
+            }
+            if (model.LastName != null)
+            {
+                user.LastName = model.LastName;
+            }
+
+            if (AttachmentHelper.IsWebFriendlyAttachment(image))
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                user.Avatar = "/Uploads/" + fileName;
+            }
+
+
             db.SaveChanges();
-            return RedirectToAction("EditProfile", new { userId});
+            return RedirectToAction("EditProfile");
         }
 
         //
@@ -356,7 +376,7 @@ namespace MikeBugTracker.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -407,6 +427,6 @@ namespace MikeBugTracker.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

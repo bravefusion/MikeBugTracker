@@ -4,172 +4,161 @@
     ViewBag.Title = "Details";
 }
 
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Manage Roles</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Manage Roles</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
 
-        <div>
-            <h4>Ticket</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.AssignedToUser.FirstName)
-                </dt>
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedToUser.FirstName)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.AssignedToUser.FirstName)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.AssignedToUser.FirstName)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.OwnerUser.FirstName)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.OwnerUser.FirstName)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Project.Name)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Name)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Project.Name)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TicketPriorities.PriorityName)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.TicketPriorities.PriorityName)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketStatus.StatusName)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketStatus.StatusName)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TicketStatus.StatusName)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.TicketStatus.StatusName)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketTypes.TypeName)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketTypes.TypeName)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TicketTypes.TypeName)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.TicketTypes.TypeName)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Title)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Title)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Created)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Created)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Updated)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Updated)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Updated)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Updated)
+        </dd>
 
-            </dl>
-        </div>
-        <div class="row">
-            <div>
-                @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("TicketId", Model.Id)
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-lg">
-                                @Html.TextArea("Comments", new { rows = 5, cols = 50, placeholder = "Attachment file" })
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
+    </dl>
+</div>
+<div class="row">
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("TicketId", Model.Id)
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-lg">
-                            <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
+                            @Html.TextArea("CommentBody", new { rows = 5, cols = 50, placeholder = "Add Comment" })
                         </div>
                     </div>
 
-                    <div class="from-group">
-                        @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
-                        {
-                            <div>
-                                <h4>@comment.User.FirstName</h4>
-                                <div class="media-body">
-                                    @comment.CommentBody
-                                </div>
-                            </div>
-                        }
-
-                    </div>
-                }
-            </div>
-
-
-            <div class="row">
-                <div>
-                    @using (Html.BeginForm("Create","TicketAttachments",FormMethod.Post , new { enctype = "Multipart/form-data"}))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden("TicketId",Model.Id)
-                        @Html.Label("ticket Attachment", htmlAttributes: new {  @class = "control-label col-md-2"})
-
-                        <input type="file" name="image" class="form-control" />
-                        @Html.ValidationMessage("Attach.Filepath", "", new {  @class ="text-danger"})
-
-                        <button type="submit" class="btn btn-sm btn-primary"> Add Attachment</button>
-                    }
-                    <div class="from-group">
-                        @foreach ( var Attach in Model.TicketAttachments)
-                        {
-                            <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
-                        }
-
+                </div>
+                <div class="row">
+                    <div class="col-lg">
+                        <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
                     </div>
                 </div>
+            }
+        }
+
+
+        <div class="from-group">
+            @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+            {
+                <div>
+                    <h4>@comment.User.FirstName</h4>
+                    <div class="media-body">
+                        @comment.CommentBody
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div>
+            @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("TicketId", Model.Id)
+                @Html.Label("ticket Attachment", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <input type="file" name="image" class="form-control" />
+                @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
+
+                <button type="submit" class="btn btn-sm btn-primary"> Add Attachment</button>
+            }
+            <div class="from-group">
+                @foreach (var Attach in Model.TicketAttachments)
+                {
+                    <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
+                }
 
             </div>
         </div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-       </div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+
+</p>
+

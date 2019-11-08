@@ -1,5 +1,9 @@
 ﻿
 @model MikeBugTracker.Models.UserProfileViewModel
+@using Microsoft.AspNet.Identity
+
+
+
 @{
     ViewBag.Title = "Manage";
 }
@@ -9,7 +13,7 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -42,7 +46,7 @@
                                      alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">Nina Mcintire</h3>
+                            <h3 class="profile-username text-center"></h3>
 
                             <p class="text-muted text-center">Software Engineer</p>
 
@@ -81,38 +85,17 @@
                                     <div class="tab-pane" id="settings">
                                         @using (Html.BeginForm())
                                         {@Html.AntiForgeryToken()
-                                            <div class="form-group row">
-                                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                                <div class="col-sm-10">
-                                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="inputName2" class="col-sm-2 col-form-label">LastName</label>
-                                                <div class="col-sm-10">
-                                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form -control" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="offset-sm-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                                </div>
-                                            </div>
-                                        }
-
-
-                                    </div>
-                                    <!-- /.post -->
-                                </div>
-
-                                <div class="tab-pane" id="avaSet">
-                                    <form class="form-horizontal">
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputName2" class="col-sm-2 col-form-label">LastName</label>
+                                            <div class="col-sm-10">
+                                                @Html.TextBoxFor(model => model.LastName, new { @class = "form -control" })
                                             </div>
                                         </div>
 
@@ -121,7 +104,34 @@
                                                 <button type="submit" class="btn btn-danger">Submit</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    }
+
+
+                                    </div>
+                                    <!-- /.post -->
+                                </div>
+
+                                <div class="tab-pane" id="avaSet">
+                                    @using (Html.BeginForm("EditProfile", "Manage", FormMethod.Post, new { @enctype = "Multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="form-group row">
+                                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                            <div class="col-sm-10">
+                                                @*@Html.TextBoxFor(m => m.Avatar, new { @class = "form-control", type = "file", name = "image" })*@
+                                                <input type="file" name="image" class="form-control" id="inputName" placeholder="Avatar">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="offset-sm-2 col-sm-10">
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                            </div>
+                                        </div>
+
+                                    }
+
+
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -136,7 +146,7 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-</div>
+
 <!-- /.content-wrapper -->
 @*<div>
         <h4>Change your account settings</h4>
@@ -218,5 +228,5 @@
         </dl>
     </div>*@
 
-<h2>EditProfile</h2>
+
 

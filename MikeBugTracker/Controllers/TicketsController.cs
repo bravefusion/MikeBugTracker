@@ -50,7 +50,7 @@ namespace MikeBugTracker.Controllers
             }
             return View(ticket);
         }
-
+        [Authorize(Roles = "Submitter")]
         // GET: Tickets/Create
         public ActionResult Create()
         {
@@ -102,9 +102,9 @@ namespace MikeBugTracker.Controllers
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
-            ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "UserId", ticket.TicketPrioritiesId);
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "UserId", ticket.TicketStatusId);
-            ViewBag.TicketTypesId = new SelectList(db.TicketTypes, "Id", "UserId", ticket.TicketTypesId);
+            ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "PriorityName", ticket.TicketPrioritiesId);
+            ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "StatusName", ticket.TicketStatusId);
+            ViewBag.TicketTypesId = new SelectList(db.TicketTypes, "Id", "TypeName", ticket.TicketTypesId);
             return View(ticket);
         }
 

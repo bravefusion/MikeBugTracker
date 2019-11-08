@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -17,7 +18,15 @@ namespace MikeBugTracker.Models
         public string LastName { get; set; }
         [Display(Name = "Display Name")]
         public string DisplayName { get; set; }
-
+        public string Avatar { get; set; }
+        [NotMapped]
+        public string FullName 
+        {
+            get
+            {
+                return $"{FirstName},{LastName}";
+            } 
+        }
         public virtual ICollection<TicketComments> TicketComments { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<TicketAttachment> TicketAttachments { get; set; }

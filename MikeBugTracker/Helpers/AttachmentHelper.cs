@@ -13,7 +13,7 @@ namespace MikeBugTracker.Helpers
         {
             if (file == null)
                 return false;
-            if (file.ContentLength > 2 * 1024 * 1024 || file.ContentLength < 1024)
+            if (file.ContentLength > 10 * 1024 * 1024 || file.ContentLength < 1024)
                 return false;
             try
             {
@@ -30,4 +30,6 @@ namespace MikeBugTracker.Helpers
             }
         }
     }
+
+
 }
