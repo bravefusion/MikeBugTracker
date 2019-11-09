@@ -184,6 +184,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AttachmentHelper.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ProjectsHelper.cs" />
     <Compile Include="Helpers\TicketHelper.cs" />
     <Compile Include="Helpers\TicketHistoryHelper.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminUser.cs" />
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
@@ -224,6 +226,7 @@
     <Content Include="Scripts\jquery.knob.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.overlayScrollbars.min.js" />
+    <Content Include="Scripts\Layout.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\sparkline.js" />
     <Content Include="Scripts\summernote-bs4.min.js" />
