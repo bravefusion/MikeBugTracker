@@ -14,9 +14,6 @@
 <div>
     <h4>Ticket</h4>
     <hr />
-
-
-
     <!-- Main content -->
     <section class="content">
 
@@ -39,7 +36,7 @@
                     <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
                         <div class="row">
                             <div class="col-12 col-sm-4">
-                                <div class="info-box bg-light">
+                                <div class="info-box bg-maroon">
                                     <div class="info-box-content">
                                         <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)</span>
                                         <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.TicketPriorities.PriorityName)</span>
@@ -47,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
-                                <div class="info-box bg-light">
+                                <div class="info-box bg-gradient-fuchsia">
                                     <div class="info-box-content">
                                         <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.TicketStatus.StatusName)</span>
                                         <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.TicketStatus.StatusName)</span>
@@ -102,7 +99,7 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
-                                            @comment.CommentBody
+                                            @comment.CommentBody 
                                         </p>
                                         <p>
                                             <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
@@ -149,7 +146,7 @@
                             </ul>
                             <div class="text-center mt-5 mb-3">
                                 <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                                <a href="#" class="btn btn-sm btn-warning">Report contact</a>
+                                <a href="#" class="btn btn-sm btn-warning">Ticket History</a>
                             </div>
                         </div>
                     </div>
@@ -160,7 +157,6 @@
 
         </section>
         <!-- /.content -->
-
 
 
 
