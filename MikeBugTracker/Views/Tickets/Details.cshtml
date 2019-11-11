@@ -1,138 +1,131 @@
 ﻿@model MikeBugTracker.Models.Ticket
-
+@using Microsoft.AspNet.Identity
+@using MikeBugTracker.Models
+@{
+    var db = new ApplicationDbContext();
+    var userId = User.Identity.GetUserId();
+    var user = db.Users.Find(userId);
+}
 @{
     ViewBag.Title = "Details";
 }
 
 
-    <div>
-        <h4>Ticket</h4>
-        <hr />
+<div>
+    <h4>Ticket</h4>
+    <hr />
 
 
 
-        <!-- Main content -->
-        <section class="content">
+    <!-- Main content -->
+    <section class="content">
 
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Projects Detail</h3>
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Ticket Detail</h3>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                            <div class="row">
-                                <div class="col-12 col-sm-4">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Estimated budget</span>
-                                            <span class="info-box-number text-center text-muted mb-0">2300</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Total amount spent</span>
-                                            <span class="info-box-number text-center text-muted mb-0">2000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                                            <span class="info-box-number text-center text-muted mb-0">20 </span>
-                                        </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                        <div class="row">
+                            <div class="col-12 col-sm-4">
+                                <div class="info-box bg-light">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)</span>
+                                        <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.TicketPriorities.PriorityName)</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <h4>Recent Activity</h4>
-                                    <div class="post">
-                                        <div class="user-block">
-                                            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                                            <span class="username">
-                                                <a href="#">Jonathan Burke Jr.</a>
-                                            </span>
-                                            <span class="description">Shared publicly - 7:45 PM today</span>
-                                        </div>
-                                        <!-- /.user-block -->
-                                        <p>
-                                            Lorem ipsum represents a long-held tradition for designers,
-                                            typographers and the like. Some people hate it and argue for
-                                            its demise, but others ignore.
-                                        </p>
-
-                                        <p>
-                                            <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                                        </p>
+                            <div class="col-12 col-sm-4">
+                                <div class="info-box bg-light">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.TicketStatus.StatusName)</span>
+                                        <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.TicketStatus.StatusName)</span>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="info-box bg-gradient-cyan">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.TicketTypes.TypeName)</span>
+                                        <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.TicketTypes.TypeName)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Add a Comment</h4>
+                                <div class="post">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("TicketId", Model.Id)
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-lg">
+                                                        @Html.TextArea("CommentBody", new { rows = 5, cols = 50, placeholder = "Add Comment" })
+                                                    </div>
+                                                </div>
 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg">
+                                                    <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+                                {
                                     <div class="post clearfix">
                                         <div class="user-block">
-                                            <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+
+                                            <img class="img-circle img-bordered-sm" src=@user.Avatar alt="">
                                             <span class="username">
-                                                <a href="#">Sarah Ross</a>
+                                                <a href="#">@comment.User.FullName</a>
                                             </span>
                                             <span class="description">Sent you a message - 3 days ago</span>
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
-                                            Lorem ipsum represents a long-held tradition for designers,
-                                            typographers and the like. Some people hate it and argue for
-                                            its demise, but others ignore.
+                                            @comment.CommentBody
                                         </p>
                                         <p>
                                             <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
                                         </p>
+                                        
                                     </div>
+                                }
 
-                                    <div class="post">
-                                        <div class="user-block">
-                                            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                                            <span class="username">
-                                                <a href="#">Jonathan Burke Jr.</a>
-                                            </span>
-                                            <span class="description">Shared publicly - 5 days ago</span>
-                                        </div>
-                                        <!-- /.user-block -->
-                                        <p>
-                                            Lorem ipsum represents a long-held tradition for designers,
-                                            typographers and the like. Some people hate it and argue for
-                                            its demise, but others ignore.
-                                        </p>
-
-                                        <p>
-                                            <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                            <h3 class="text-primary"><i class="fas fa-paint-brush"></i> AdminLTE v3</h3>
-                            <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
+                            <h3 class="text-primary"><i class="fas fa-paint-brush"></i> @Html.DisplayFor(model => model.Title)</h3>
+                            <p class="text-muted">@Html.DisplayFor(model => model.Description)</p>
                             <br>
                             <div class="text-muted">
                                 <p class="text-sm">
-                                    Client Company
-                                    <b class="d-block">Deveint Inc</b>
+                                    Assigned to Ticket
+                                    <b class="d-block">@Html.DisplayFor(model => model.AssignedToUser.FullName)</b>
                                 </p>
                                 <p class="text-sm">
-                                    Project Leader
-                                    <b class="d-block">Tony Chicken</b>
+                                    Ticket Submitter
+                                    <b class="d-block">@Html.DisplayFor(model => model.OwnerUser.FullName)</b>
                                 </p>
                             </div>
 
@@ -180,7 +173,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.AssignedToUser.FirstName)
+                @Html.DisplayFor(model => model.AssignedToUser.FullName)
             </dd>
 
             <dt>
@@ -188,7 +181,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.OwnerUser.FirstName)
+                @Html.DisplayFor(model => model.OwnerUser.FullName)
             </dd>
 
             <dt>
@@ -257,74 +250,74 @@
 
         </dl>
     </div>
-<div class="row">
-    <div>
-        @if (User.Identity.IsAuthenticated)
-        {
-            using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                @Html.Hidden("TicketId", Model.Id)
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-lg">
-                            @Html.TextArea("CommentBody", new { rows = 5, cols = 50, placeholder = "Add Comment" })
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-lg">
-                        <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
-                    </div>
-                </div>
-            }
-        }
-
-
-        <div class="from-group">
-            @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
-            {
-                <div>
-                    <h4>@comment.User.FirstName</h4>
-                    <div class="media-body">
-                        @comment.CommentBody
-                    </div>
-                </div>
-            }
-
-        </div>
-
-    </div>
-
-
     <div class="row">
         <div>
-            @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+            @if (User.Identity.IsAuthenticated)
             {
-                @Html.AntiForgeryToken()
-                @Html.Hidden("TicketId", Model.Id)
-                @Html.Label("ticket Attachment", htmlAttributes: new { @class = "control-label col-md-2" })
-
-                <input type="file" name="image" class="form-control" />
-                @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
-
-                <button type="submit" class="btn btn-sm btn-primary"> Add Attachment</button>
-            }
-            <div class="from-group">
-                @foreach (var Attach in Model.TicketAttachments)
+                using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
                 {
-                    <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("TicketId", Model.Id)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-lg">
+                                @Html.TextArea("CommentBody", new { rows = 5, cols = 50, placeholder = "Add Comment" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
+                        </div>
+                    </div>
+                }
+            }
+
+
+            <div class="from-group">
+                @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+                {
+                    <div>
+                        <h4>@comment.User.FirstName</h4>
+                        <div class="media-body">
+                            @comment.CommentBody
+                        </div>
+                    </div>
                 }
 
             </div>
+
         </div>
 
-    </div>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
 
-</p>
+        <div class="row">
+            <div>
+                @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("TicketId", Model.Id)
+                    @Html.Label("ticket Attachment", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <input type="file" name="image" class="form-control" />
+                    @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
+
+                    <button type="submit" class="btn btn-sm btn-primary"> Add Attachment</button>
+                }
+                <div class="from-group">
+                    @foreach (var Attach in Model.TicketAttachments)
+                    {
+                        <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+
+    </p>
 
