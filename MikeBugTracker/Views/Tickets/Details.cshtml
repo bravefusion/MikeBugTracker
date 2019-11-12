@@ -135,13 +135,17 @@
 
                                 <li>
                                     <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
+                                    @foreach (var Attach in Model.TicketAttachments)
+                                    {
+                                        <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
+                                    }
                                 </li>                                
                             }
                             </ul>
                             <div class="text-center mt-5 mb-3">
-                                <input type="file" name="image" class="form-control" />
+                                
                                 <button type="submit" class="btn btn-sm btn-primary">Add File</button>
-                                <a href="#" class="btn btn-sm btn-warning">Ticket History</a>
+                                <a href=@Url.Action("Index","TicketHistories") class="btn btn-sm btn-warning">Ticket History</a>
                             </div>
                         </div>
                     </div>

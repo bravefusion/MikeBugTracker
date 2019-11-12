@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using MikeBugTracker.Helpers;
 using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
@@ -14,6 +15,7 @@ namespace MikeBugTracker.Controllers
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private TicketHistoryHelper historyHelper = new TicketHistoryHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -125,7 +127,8 @@ namespace MikeBugTracker.Controllers
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
 
-                var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(ticket => ticket.);
+                var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+                historyHelper.RecordHistoricalChanges(oldTicket, newTicket);
 
                 return RedirectToAction("Index");
             }
