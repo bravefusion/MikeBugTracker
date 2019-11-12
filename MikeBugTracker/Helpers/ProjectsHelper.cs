@@ -13,6 +13,7 @@ namespace MikeBugTracker.Helpers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper rolesHelper = new UserRolesHelper();
+        
 
         public List<string> ListUsersOnProjectInRole(int projectId, string roleName)
         {

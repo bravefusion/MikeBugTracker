@@ -260,5 +260,13 @@ $(function () {
       options: salesGraphChartOptions
     }
   )
+    $('sidebarCollaspe').on('click', function () {
+        $('#sidebar').toggleClass('active')
+    });
+
+    $('#sidebarCollaspe').on('click', function () {
+        $("body").toggleClass("mini-navbar");
+        SmoothlyMenu();
+    })
 
 })

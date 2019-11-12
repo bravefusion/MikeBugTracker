@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<MikeBugTracker.Models.Project>
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -71,18 +72,13 @@
                     </td>
                     <td>
                         <ul class="list-inline">
+                            @foreach (var user in item.Users)
+                            {
                             <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                @user.FullName <img alt="" class="table-avatar" src="@user.Avatar">
                             </li>
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                            </li>
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                            </li>
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar04.png">
-                            </li>
+                            }                           
+                            
                         </ul>
                     </td>
                     <td class="project_progress">
