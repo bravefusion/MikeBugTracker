@@ -38,7 +38,7 @@
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
 
-                @Html.ValidationSummary("",new { @class = "text-danger"})
+                @Html.ValidationSummary("", new { @class = "text-danger" })
 
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
@@ -128,6 +128,7 @@
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="https://kit.fontawesome.com/aaacd28912.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

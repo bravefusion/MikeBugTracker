@@ -200,27 +200,31 @@
                                     Projects
                                 </p>
                             </a>
-                        <li class="nav-item">
-                            <a href=@Url.Action("ManageRoles","Admin") class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Manage Roles</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href=@Url.Action("ManageProjectUsers","Admin") class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Manage Project Users</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href=@Url.Action("CustomLogOff","Account") class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Log Off</p>
-                            </a>
-                        </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                            <li class="nav-item">
+                                <a href=@Url.Action("ManageRoles","Admin") class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Manage Roles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href=@Url.Action("ManageProjectUsers","Admin") class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Manage Project Users</p>
+                                </a>
+                            </li>
+                        }
+
+                            <li class="nav-item">
+                                <a href=@Url.Action("CustomLogOff","Account") class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Log Off</p>
+                                </a>
+                            </li>
 
 
-                    </ul>
+                        </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

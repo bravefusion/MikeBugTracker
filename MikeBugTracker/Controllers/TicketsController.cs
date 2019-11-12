@@ -54,8 +54,8 @@ namespace MikeBugTracker.Controllers
         // GET: Tickets/Create
         public ActionResult Create()
         {
-            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FullName");
+            ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FullName");
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.TicketPrioritiesId = new SelectList(db.TicketPriorities, "Id", "PriorityName");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "StatusName");
@@ -68,11 +68,12 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,TicketTypesId,TicketPrioritiesId,TicketStatusId,OwnerUserId,AssignedToUserId,Title,Description,Created,Updated")] Ticket ticket)
+        public ActionResult Create([Bind(Include = "Id,ProjectId,TicketTypesId,TicketPrioritiesId,TicketStatusId,Title,Description,Created,Updated")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
                 ticket.Created = DateTime.Now;
+                ticket.OwnerUserId = User.Identity.GetUserId();
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -113,12 +114,19 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectId,TicketTypesId,TicketPrioritiesId,TicketStatusId,OwnerUserId,AssignedToUserId,Title,Description,Created,Updated")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "Id,ProjectId,TicketTypesId,TicketPrioritiesId,TicketStatusId,AssignedToUserId,Title,Description,Created")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
+
+                var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+
+                ticket.Updated = DateTime.Now;
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
+
+                var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(ticket => ticket.);
+
                 return RedirectToAction("Index");
             }
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
