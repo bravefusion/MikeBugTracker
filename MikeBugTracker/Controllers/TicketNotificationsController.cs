@@ -53,6 +53,7 @@ namespace MikeBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticketNotification.Created = DateTime.Now;
                 db.TicketNotifications.Add(ticketNotification);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,7 +86,7 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TicketId,Body, RecipientId,Unread")] TicketNotification ticketNotification)
+        public ActionResult Edit([Bind(Include = "Id,TicketId,Created,Body,RecipientId,Unread")] TicketNotification ticketNotification)
         {
             if (ModelState.IsValid)
             {

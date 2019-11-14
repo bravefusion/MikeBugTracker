@@ -33,6 +33,10 @@ namespace MikeBugTracker.Helpers
             var result = userManager.RemoveFromRole(userId, roleName);
             return result.Succeeded;
         }
+        public bool IsDemoUser(string userId)
+        {
+            return userManager.GetRoles(userId).FirstOrDefault().Contains("Demo_");
+        }
         public ICollection<ApplicationUser> UsersInRole(string roleName)
         {
             var resultList = new List<ApplicationUser>();

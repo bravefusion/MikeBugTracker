@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MikeBugTracker.Helpers;
 
 namespace MikeBugTracker.Models
 {
@@ -31,7 +33,7 @@ namespace MikeBugTracker.Models
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<TicketAttachment> TicketAttachments { get; set; }
         public virtual ICollection<TicketHistory> TicketHistory { get; set; }
-        public virtual ICollection<TicketNotification> TicketNotification { get; set; }
+        //public virtual ICollection<TicketNotification> TicketNotification { get; set; }
 
         public ApplicationUser()
         {
@@ -39,7 +41,7 @@ namespace MikeBugTracker.Models
             Projects = new HashSet<Project>();
             TicketAttachments = new HashSet<TicketAttachment>();
             TicketHistory = new HashSet<TicketHistory>();
-            TicketNotification = new HashSet<TicketNotification>();
+            //TicketNotification = new HashSet<TicketNotification>();
         }
 
 
@@ -57,6 +59,23 @@ namespace MikeBugTracker.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //this will lock out demo roles from making changes 
+        public override int SaveChanges()
+        {
+            UserRolesHelper role = new UserRolesHelper();
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+
+            if (!role.IsDemoUser(userId))
+            {
+                return base.SaveChanges();
+            }
+            else
+            {
+                //ViewData["Message"] = "You are not authorized to make changes.";
+                return 0;
+            }
+        }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
