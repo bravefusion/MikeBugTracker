@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MikeBugTracker.Models.ManageRolesViewModel>
+
 @{
     ViewBag.Title = "ManageRoles";
 }
@@ -30,66 +31,111 @@
     
     <!-- /.content-header -->
    
-        <div class="row">
-            <div class="col-md-6">
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    <div class="row">
-                        <div class="col-md-12">
-                            @Html.ListBox("UsersIds", null, new { @class = "cntrlWide" })
-                        </div>
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ListBox("UsersIds", null, new { @class = "cntrlWide" })
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @Html.DropDownList("Role", null, "--Select Role--", new { @class = "cntrlWide" })
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.DropDownList("Role", null, "--Select Role--", new { @class = "cntrlWide" })
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
                     </div>
-                }
-            </div>
-
-
-
-            <div class="col-md-6">
-                <table class="table">
-                    <tr>
-                        <th>
-
-                            @Html.DisplayName("User Name")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Role")
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var user in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(model => user.UserName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => user.RoleName)
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-
-
-
-
-
-
-
-            </div>
+                </div>
+            }
         </div>
+
+
+
+
+        <div class="col-md-6">
+            <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayName("Name")</th>
+                            <th>@Html.DisplayName("Image")</th>
+                            <th>@Html.DisplayName("Role")</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                        <tr>
+                            <td>@Html.DisplayFor(model => user.UserName)</td>
+                            <td>
+                                <img class="img-circle img-bordered-sm" src= alt="">
+                            </td>
+                            <td>@Html.DisplayFor(model => user.RoleName)</td>
+                            
+                        </tr>
+                        }                           
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>@Html.DisplayName("Name")</th>
+                            <th>@Html.DisplayName("Image")</th>
+                            <th>@Html.DisplayName("Role")</th>                            
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+           </div>
+        </div>
+        <!-- /.card -->
+
+
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <th>
+
+                        @Html.DisplayName("User Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Role")
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => user.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => user.RoleName)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+
+
+
+
+
+
+        </div>
+    </div>
 
 
 
