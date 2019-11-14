@@ -17,7 +17,7 @@ namespace MikeBugTracker.Controllers
         // GET: TicketNotifications
         public ActionResult Index()
         {
-            var ticketNotifications = db.TicketNotifications.Include(t => t.Ticket).Include(t => t.User);
+            var ticketNotifications = db.TicketNotifications.Include(t => t.Recipient).Include(t => t.Ticket);
             return View(ticketNotifications.ToList());
         }
 
@@ -39,8 +39,8 @@ namespace MikeBugTracker.Controllers
         // GET: TicketNotifications/Create
         public ActionResult Create()
         {
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.RecipientId = new SelectList(db.Tickets, "Id", "FirstName");
+            ViewBag.TicketId = new SelectList(db.Users, "Id", "Title");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,TicketId,Body,Unread")] TicketNotification ticketNotification)
+        public ActionResult Create([Bind(Include = "Id,TicketId,Body,RecipientId,Unread")] TicketNotification ticketNotification)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +58,8 @@ namespace MikeBugTracker.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId", ticketNotification.TicketId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", ticketNotification.UserId);
+            ViewBag.RecipientId = new SelectList(db.Users, "Id", "FirstName", ticketNotification.RecipientId);
+            ViewBag.TicketId = new SelectList(db.Tickets, "Id","Title", ticketNotification.TicketId);
             return View(ticketNotification);
         }
 
@@ -75,8 +75,8 @@ namespace MikeBugTracker.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId", ticketNotification.TicketId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", ticketNotification.UserId);
+            ViewBag.RecipientId = new SelectList(db.Users, "Id", "FirstName", ticketNotification.RecipientId);
+            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketNotification.TicketId);
             return View(ticketNotification);
         }
 
@@ -85,7 +85,7 @@ namespace MikeBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,TicketId,Body,Unread")] TicketNotification ticketNotification)
+        public ActionResult Edit([Bind(Include = "Id,TicketId,Body, RecipientId,Unread")] TicketNotification ticketNotification)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +93,8 @@ namespace MikeBugTracker.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId", ticketNotification.TicketId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", ticketNotification.UserId);
+            ViewBag.RecipientId = new SelectList(db.Users, "Id", "FirstName", ticketNotification.RecipientId);
+            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "FirstName", ticketNotification.TicketId);
             return View(ticketNotification);
         }
 

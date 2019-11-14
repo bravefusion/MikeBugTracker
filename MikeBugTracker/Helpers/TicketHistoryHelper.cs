@@ -42,14 +42,14 @@ namespace MikeBugTracker.Helpers
                 db.TicketHistories.Add(newHistoryRecord);
             }
 
-            if (oldTicket.OwnerUserId != newTicket.OwnerUserId)
+            if (oldTicket.AssignedToUserId != newTicket.AssignedToUserId)
             {
                 var newHistoryRecord = new TicketHistory
                 {
                     Property = "DeveloperId",
                     TicketId = oldTicket.Id,
-                    OldValue = oldTicket.OwnerUserId == null ? "UnAssigned" : oldTicket.OwnerUserId,
-                    NewValue = newTicket.OwnerUserId == null ? "UnAssigned" : oldTicket.OwnerUserId,
+                    OldValue = oldTicket.AssignedToUserId == null ? "UnAssigned" : oldTicket.AssignedToUserId,
+                    NewValue = newTicket.AssignedToUserId == null ? "UnAssigned" : oldTicket.AssignedToUserId,
                     Changed = (DateTime)newTicket.Updated,
                     UserId = HttpContext.Current.User.Identity.GetUserId()
                 };
