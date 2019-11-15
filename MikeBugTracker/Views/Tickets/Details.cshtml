@@ -138,19 +138,19 @@
 
                                     @foreach (var Attach in Model.TicketAttachments)
                                     {
-                                        <input type="file" name="image" class="form-control" />
-                                        @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
+                                        
                                         <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
                                     }
                                 </li>
 
                             </ul>
                             <div class="text-center mt-5 mb-3">
-                                <button type="submit" class="btn btn-sm btn-primary">Add File</button>                               
+                                <input type="file" name="image" class="form-control" />
+                                @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
+                                <button type="submit" class="btn btn-sm btn-primary">Add File</button>
                             </div>
                         }
-                        <div class="text-center mt-5 mb-3">
-                            <button type="submit" class="btn btn-sm btn-primary">Add File</button>
+                        <div class="text-center mt-5 mb-3">                            
                             <a href=@Url.Action("Index","TicketHistories") class="btn btn-sm btn-warning">Ticket History</a>
                         </div>
                     </div>
@@ -159,166 +159,13 @@
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
 
+        </p>
         </section>
-        <!-- /.content -->
+        <!-- /.content -->     
+    
 
-
-
-
-
-
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.AssignedToUser.FirstName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AssignedToUser.FullName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.OwnerUser.FullName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Project.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Project.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TicketPriorities.PriorityName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TicketStatus.StatusName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TicketStatus.StatusName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TicketTypes.TypeName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TicketTypes.TypeName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Created)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Created)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Updated)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Updated)
-            </dd>
-
-        </dl>
-    </div>
-    <div class="row">
-        <div>
-            @if (User.Identity.IsAuthenticated)
-            {
-                using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("TicketId", Model.Id)
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-lg">
-                                @Html.TextArea("CommentBody", new { rows = 5, cols = 50, placeholder = "Add Comment" })
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-lg">
-                            <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
-                        </div>
-                    </div>
-                }
-            }
-
-
-            <div class="from-group">
-                @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
-                {
-                    <div>
-                        <h4>@comment.User.FirstName</h4>
-                        <div class="media-body">
-                            @comment.CommentBody
-                        </div>
-                    </div>
-                }
-
-            </div>
-
-        </div>
-
-
-        <div class="row">
-            <div>
-                @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "Multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("TicketId", Model.Id)
-                    @Html.Label("ticket Attachment", htmlAttributes: new { @class = "control-label col-md-2" })
-
-                    <input type="file" name="image" class="form-control" />
-                    @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
-
-                    <button type="submit" class="btn btn-sm btn-primary">Attachment</button>
-                }
-                <div class="from-group">
-                    @foreach (var Attach in Model.TicketAttachments)
-                    {
-                        <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
-                    }
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-
-    </p>
-
+ </div>

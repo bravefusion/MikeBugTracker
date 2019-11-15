@@ -60,21 +60,18 @@ namespace MikeBugTracker.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         //this will lock out demo roles from making changes 
-        public override int SaveChanges()
-        {
-            UserRolesHelper role = new UserRolesHelper();
-            var userId = HttpContext.Current.User.Identity.GetUserId();
+        //public override int SaveChanges()
+        //{
+        //    UserRolesHelper role = new UserRolesHelper();
 
-            if (!role.IsDemoUser(userId))
-            {
-                return base.SaveChanges();
-            }
-            else
-            {
-                //ViewData["Message"] = "You are not authorized to make changes.";
-                return 0;
-            }
-        }
+        //    var userId = HttpContext.Current.User.Identity.GetUserId();
+        //    if (role.IsDemoUser(userId))
+        //    {
+                
+        //        return base.SaveChanges();
+        //    }
+        //    return 0; 
+        //}
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

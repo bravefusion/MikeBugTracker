@@ -272,9 +272,9 @@ namespace MikeBugTracker.Migrations
                 new TicketTypes { TypeName = "Training Request", Description = "The client has called requesting training on the software" }
                 );
 
-            //save the above foreign kety for the ticket seed
-            context.SaveChanges();
+            //save the above foreign key for the ticket seed
 
+            context.SaveChanges();
             var projects = context.Projects;
             var priorities = context.TicketPriorities;
             var status = context.TicketStatus;
@@ -285,10 +285,10 @@ namespace MikeBugTracker.Migrations
                 t => t.Title,
                 new Ticket
                 {
-                    ProjectId = projects.FirstOrDefault(p => p.Name.Contains("Portfolio")).Id,
-                    TicketPrioritiesId = priorities.FirstOrDefault(tp => tp.PriorityName.Contains("Low")).Id,
-                    TicketStatusId = status.FirstOrDefault(ts => ts.StatusName.Contains("In Progress")).Id,
-                    TicketTypesId = types.FirstOrDefault(ty => ty.TypeName.Contains("Feature Request")).Id,
+                    ProjectId = projects.FirstOrDefault(p => p.Name == "Portfolio").Id,
+                    TicketPrioritiesId = priorities.FirstOrDefault(tp => tp.PriorityName == "Low").Id,
+                    TicketStatusId = status.FirstOrDefault(ts => ts.StatusName == "In Progress").Id,
+                    TicketTypesId = types.FirstOrDefault(ty => ty.TypeName == "Feature Request").Id,
                     OwnerUserId = DemosubmitterId,
                     Title = "Needs Attention",
                     Created = DateTime.Now,
