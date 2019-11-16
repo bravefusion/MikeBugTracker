@@ -225,6 +225,9 @@
     <Content Include="Scripts\daterangepicker.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.flot.js" />
+    <Content Include="Scripts\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\jquery.flot.resize.min.js" />
     <Content Include="Scripts\jquery.knob.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.overlayScrollbars.min.js" />
