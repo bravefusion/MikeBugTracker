@@ -94,7 +94,7 @@ namespace MikeBugTracker.Migrations
                     LastName = "Hinton",
                     DisplayName = "Mike H",
 
-                }, WebConfigurationManager.AppSettings["AdminPassword"]);
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
 
             }
 
@@ -161,7 +161,7 @@ namespace MikeBugTracker.Migrations
                     LastName = "Hinton",
                     DisplayName = "Sora H",
 
-                }, WebConfigurationManager.AppSettings["NPMPassword"]);
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
 
             if (!context.Users.Any(u => u.Email == "lfiasco@gmail.com"))
@@ -187,7 +187,7 @@ namespace MikeBugTracker.Migrations
                     LastName = "Fudo",
                     DisplayName = "Yusei F",
 
-                }, WebConfigurationManager.AppSettings["NSubPassword"]);
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
 
             if (!context.Users.Any(u => u.Email == "jadenyuki@gmail.com"))
@@ -200,7 +200,7 @@ namespace MikeBugTracker.Migrations
                     LastName = "Yuki",
                     DisplayName = "Jaden Y",
 
-                }, WebConfigurationManager.AppSettings["NWSubPassword"]);
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
 
 

@@ -62,7 +62,7 @@ namespace MikeBugTracker.Controllers
             {
                 EmailService ems = new EmailService();
                 IdentityMessage msg = new IdentityMessage();
-                ApplicationUser user = new db.Users.Find(model.AssignedToUserId);
+                ApplicationUser user =  db.Users.Find(model.AssignedToUserId);
                 msg.Body = "You have been assigned a new Ticket." + Environment.NewLine +
                 "Please click the following link to view the details  " +
                "<a href=\"" + callbackUrl + "\">NEW TICKET</a>";

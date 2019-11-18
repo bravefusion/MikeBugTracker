@@ -51,17 +51,13 @@ namespace MikeBugTracker
     }
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
             await SendMailAsync(message);
         }
 
-        public async Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your email service here to send an email.            
-            await SendMailAsync(message);
-        }
+        
         public async Task<bool> SendMailAsync(IdentityMessage message)
         {
             //Private.config set up             

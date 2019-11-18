@@ -9,8 +9,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    
+<head>    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bug Tracker | Log in</title>
@@ -100,9 +99,11 @@
                     <p class="mb-0">
                         <a href=@Url.Action("Register","Account") class="text-center">Register a new membership</a>
                     </p>
-                    
+                    <div>
+                        @Html.ActionLink("Demo Login", "DemoUsers", "Account",null ,new { @class = "text-center"})
+                    </div>
                     <p class="mb-0">
-                        <a href=@Url.Action("DemoUsers","Account") class="text-center">Log in as a Demo User</a>
+                        @*<a href=@Url.Action("DemoUsers","Account") class="text-center">Log in as a Demo User</a>*@
                     </p>
                 }
             </div>

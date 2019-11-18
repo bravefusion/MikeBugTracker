@@ -14,7 +14,7 @@ using MikeBugTracker.Models;
 
 namespace MikeBugTracker.Controllers
 {
-    [Authorize]
+   
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -53,6 +53,11 @@ namespace MikeBugTracker.Controllers
                 _userManager = value;
             }
         }
+        public ActionResult DemoUsers()
+        {
+            return View();
+        }
+
 
         //POST: /Account/DemoUser
         [AllowAnonymous]
