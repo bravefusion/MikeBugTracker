@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,8 @@ namespace MikeBugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private TicketHistoryHelper historyHelper = new TicketHistoryHelper();
+        private UserRolesHelper userRoles = new UserRolesHelper();
+        private ProjectsHelper userProjectsHelper = new ProjectsHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -37,6 +40,43 @@ namespace MikeBugTracker.Controllers
             
             return View(tickets.ToList());
         }
+
+        public ActionResult AssignTicket(int? id)
+        {
+            UserRolesHelper helper = new UserRolesHelper();
+            var ticket = db.Tickets.Find(id);
+            var users = helper.UsersInRole("Developer").ToList();
+            ViewBag.AssignedToUserId = new SelectList(users, "Id", "FullName", ticket.AssignedToUserId);
+            return View(ticket);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AssignTicket(Ticket model)
+        {
+            var ticket = db.Tickets.Find(model.Id);
+            ticket.AssignedToUserId = model.AssignedToUserId;
+            db.SaveChanges();
+            var callbackUrl = Url.Action("Details", "Tickets", new { id = ticket.Id },
+             protocol: Request.Url.Scheme);
+            try
+            {
+                EmailService ems = new EmailService();
+                IdentityMessage msg = new IdentityMessage();
+                ApplicationUser user = new db.Users.Find(model.AssignedToUserId);
+                msg.Body = "You have been assigned a new Ticket." + Environment.NewLine +
+                "Please click the following link to view the details  " +
+               "<a href=\"" + callbackUrl + "\">NEW TICKET</a>";
+                msg.Destination = user.Email;
+                msg.Subject = "Invite to Household";
+                await ems.SendMailAsync(msg);
+            }
+            catch (Exception ex)
+            {
+                await Task.FromResult(0);
+            }
+            return RedirectToAction("Index");
+        }
+
 
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
@@ -175,5 +215,7 @@ namespace MikeBugTracker.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }

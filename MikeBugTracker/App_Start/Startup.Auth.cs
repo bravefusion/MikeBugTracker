@@ -63,10 +63,6 @@ namespace MikeBugTracker
             //    ClientId = "",
             //    ClientSecret = ""
             //});
-
-            app.UseLinkedInAuthentication(
-               clientId: "78sqgv3vdu83as",
-                clientSecret: "JsszqhAaobBza3Mh");
         }
     }
 }
