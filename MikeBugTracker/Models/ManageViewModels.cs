@@ -12,6 +12,20 @@ namespace MikeBugTracker.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        public virtual ICollection<Project> myProjects { get; set; }
+        public virtual ICollection<Ticket> createdTickets { get; set; }
+        public virtual ICollection<Ticket> allTickets { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+
+        public IndexViewModel()
+        {
+            myProjects = new HashSet<Project>();
+            createdTickets = new HashSet<Ticket>();
+            allTickets = new HashSet<Ticket>();
+            Users = new HashSet<ApplicationUser>();
+
+        }
     }
 
     public class UserProfileViewModel

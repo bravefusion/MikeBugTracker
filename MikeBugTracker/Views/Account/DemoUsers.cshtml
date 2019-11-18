@@ -1,0 +1,174 @@
+﻿@using MikeBugTracker.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "DemoUsers";
+}
+
+
+@{ Layout = null;}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bug Tracker | Demo Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    @*<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">*@
+    <link href="~/Content/all.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    @*<link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">*@
+    <link href="~/Content/icheck-bootstrap.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    @*<link rel="stylesheet" href="../../dist/css/adminlte.min.css">*@
+    <link href="~/Content/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+    <div class="col-md-3">
+        @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("emailKey", "DemoAdminEmail")
+
+            <!-- Widget: user widget style 1 -->
+            <div class="card card-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">Demo Admin</h3>
+                    <h5 class="widget-user-desc">Able to create projects and assign roles</h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-sm-12 border-right">
+                            <div class="description-block">
+                                <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        }
+    </div>
+    <div class="col-md-3">
+        @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("emailKey", "DemoPMEmail")
+
+            <!-- Widget: user widget style 1 -->
+            <div class="card card-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">Demo Project Manager</h3>
+                    <h5 class="widget-user-desc">Able to see assigned projects and assign developers</h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-sm-4 border">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        }
+    </div>
+    <div class="col-md-3">
+        @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("emailKey", "DemoDevelopermail")
+
+            <!-- Widget: user widget style 1 -->
+            <div class="card card-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">Demo Developer</h3>
+                    <h5 class="widget-user-desc">Able to see assigned projects and tickets </h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-sm-12">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        }
+    </div>
+    <div class="col-md-3">
+        @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("emailKey", "DemoSubmitterEmail")
+
+            <!-- Widget: user widget style 1 -->
+            <div class="card card-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">Demo Submitter</h3>
+                    <h5 class="widget-user-desc">Able to see created tickets</h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-sm-12">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        }
+    </div>
+
+
+
+</body>
+</html>
+

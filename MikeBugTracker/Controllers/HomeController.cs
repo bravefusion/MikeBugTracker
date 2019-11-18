@@ -15,21 +15,7 @@ namespace MikeBugTracker.Controllers
         private UserRolesHelper rolesHelper = new UserRolesHelper();
         public ActionResult Index()
         {
-            if (User.IsInRole("Admin,Demo_Admin"))
-            {
-                var aData = new IndexViewModel();
-                aData.allTickets = db.Tickets.ToList();
-                aData.myProjects = db.Projects.ToList();
-                aData.Users = db.Users.ToList();
-                return View(aData);
-            }
-            else if (User.IsInRole("Project Manager,Demo_Project Manager"))
-            {
-                var userId =  User.Identity.GetUserId();
-                var myData = new IndexViewModel();
-                myData.myProjects = db.Projects.Where(p => p.Name == userId ).ToList();
-                return View(myData);
-            }
+            
             return View();
         }
 
@@ -48,3 +34,18 @@ namespace MikeBugTracker.Controllers
         }
     }
 }
+//if (User.IsInRole("Admin,Demo_Admin"))
+//            {
+//                var aData = new IndexViewModel();
+//                aData.allTickets = db.Tickets.ToList();
+//                aData.myProjects = db.Projects.ToList();
+//                aData.Users = db.Users.ToList();
+//                return View(aData);
+//            }
+//            else if (User.IsInRole("Project Manager,Demo_Project Manager"))
+//            {
+//                var userId =  User.Identity.GetUserId();
+//                var myData = new IndexViewModel();
+//                myData.myProjects = db.Projects.Where(p => p.Name == userId ).ToList();
+//                return View(myData);
+//            }
