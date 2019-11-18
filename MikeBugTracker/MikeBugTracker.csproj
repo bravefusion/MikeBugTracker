@@ -187,6 +187,7 @@
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\NotificationsHelper.cs" />
     <Compile Include="Helpers\ProjectsHelper.cs" />
+    <Compile Include="Helpers\StringUtilities.cs" />
     <Compile Include="Helpers\TicketHelper.cs" />
     <Compile Include="Helpers\TicketHistoryHelper.cs" />
     <Compile Include="Helpers\UserRolesHelper.cs" />
