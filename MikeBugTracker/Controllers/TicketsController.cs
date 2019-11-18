@@ -45,7 +45,7 @@ namespace MikeBugTracker.Controllers
         {
             UserRolesHelper helper = new UserRolesHelper();
             var ticket = db.Tickets.Find(id);
-            var users = helper.UsersInRole("Developer").ToList();
+            var users = helper.UsersInRole("Developer,Demo_Developer").ToList();
             ViewBag.AssignedToUserId = new SelectList(users, "Id", "FullName", ticket.AssignedToUserId);
             return View(ticket);
         }

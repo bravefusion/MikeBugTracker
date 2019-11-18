@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\SeedController.cs" />
     <Compile Include="Controllers\TicketAttachmentsController.cs" />
     <Compile Include="Controllers\TicketCommentsController.cs" />
     <Compile Include="Controllers\TicketHistoriesController.cs" />
@@ -333,6 +334,8 @@
     <Content Include="Views\Admin\ManageProjectUsers.cshtml" />
     <Content Include="Views\Manage\EditProfile.cshtml" />
     <Content Include="Views\Account\DemoUsers.cshtml" />
+    <Content Include="Views\Seed\Run.cshtml" />
+    <None Include="Properties\PublishProfiles\MikeBugTracker - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

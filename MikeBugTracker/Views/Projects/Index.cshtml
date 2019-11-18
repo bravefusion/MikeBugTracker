@@ -10,7 +10,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("Admin")||User.IsInRole("Demo_Admin"))
     {
     <p>
         @Html.ActionLink("Create New", "Create")

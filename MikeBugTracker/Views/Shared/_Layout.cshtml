@@ -201,7 +201,7 @@
                                     Projects
                                 </p>
                             </a>
-                            @if (User.IsInRole("Admin"))
+                            @if (User.IsInRole("Admin")||User.IsInRole("Demo_Admin"))
                             {
                             <li class="nav-item">
                                 <a href=@Url.Action("ManageRoles","Admin") class="nav-link">

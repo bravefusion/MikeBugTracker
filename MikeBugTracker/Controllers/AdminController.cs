@@ -63,16 +63,16 @@ namespace MikeBugTracker.Controllers
             return RedirectToAction("ManageRoles", "Admin");
         }
 
-        [Authorize(Roles = "Admin, ProjectManager")]
+        
         public ActionResult ManageProjectUsers()
         {
             ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
-            ViewBag.Developers = new MultiSelectList(rolesHelper.UsersInRole("Developer"), "Id", "FullName");
-            ViewBag.Submitters = new MultiSelectList(rolesHelper.UsersInRole("Submitter"), "Id", "FullName");
+            ViewBag.Developers = new MultiSelectList(rolesHelper.UsersInRole("Developer").Union(rolesHelper.UsersInRole("Demo_Developer")), "Id", "FullName");
+            ViewBag.Submitters = new MultiSelectList(rolesHelper.UsersInRole("Submitter").Union(rolesHelper.UsersInRole("Demo_Project Manager")), "Id", "FullName");
 
-            if (User.IsInRole("Admin"))
+            if (User.IsInRole("Admin") || User.IsInRole("Demo_Admin"))
             {
-                ViewBag.ProjectManager = new SelectList(rolesHelper.UsersInRole("Project Manager"), "Id", "FullName");
+                ViewBag.ProjectManager = new SelectList(rolesHelper.UsersInRole("Project Manager").Union(rolesHelper.UsersInRole("Demo_Project Manager")), "Id", "FullName");
             }
             //Lets create a View Model for purposes of displaying User's and their associated Projects
             var myData = new List<UserProjectListViewModel>();

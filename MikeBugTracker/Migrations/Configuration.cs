@@ -252,8 +252,8 @@ namespace MikeBugTracker.Migrations
                 new TicketStatus { StatusName = "Open", Description = "A newly created or unassigned Ticket" },
                 new TicketStatus { StatusName = "Assigned", Description = "A Ticket that has been assigned and not worked on" },
                 new TicketStatus { StatusName = "In Progress", Description = "A Ticket that has been assigned and is being worked on" },
-                new TicketStatus { StatusName = "Resolved", Description = "A Ticket that has been completed" },
-                new TicketStatus { StatusName = "Open", Description = "A newly created or unassigned Ticket" }
+                new TicketStatus { StatusName = "Resolved", Description = "A Ticket that has been completed" }
+                
                 );
 
             context.TicketPriorities.AddOrUpdate(
