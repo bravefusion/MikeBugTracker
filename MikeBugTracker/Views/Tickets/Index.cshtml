@@ -11,40 +11,43 @@
     </p>
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AssignedToUser.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Project.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TicketStatus.StatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TicketTypes.TypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated)
-        </th>
-        <th></th>
-    </tr>
+<table id ="thetable"class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedToUser.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketPriorities.PriorityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketStatus.StatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketTypes.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
 
     @foreach (var item in Model)
     {

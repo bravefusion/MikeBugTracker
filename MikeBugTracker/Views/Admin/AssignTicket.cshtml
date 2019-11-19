@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "AssignTicket";
+}
+
+<h2>AssignTicket</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <h4>Choose Ticket</h4>
+    @Html.DropDownList("Tickets", null, "--SELECT--", new { @class = "form-control" })
+    <br />
+    <h4>Choose Developer</h4>
+    @Html.DropDownList("AssignedToUserId", null, "--SELECT--", new { @class = "form-control" })
+    <br />
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary btn-large" id="btnSubmit">Assign</button>
+    </div>
+}

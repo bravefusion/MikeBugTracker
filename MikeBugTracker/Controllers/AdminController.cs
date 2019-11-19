@@ -1,8 +1,10 @@
-﻿using MikeBugTracker.Helpers;
+﻿using Microsoft.AspNet.Identity;
+using MikeBugTracker.Helpers;
 using MikeBugTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -137,7 +139,47 @@ namespace MikeBugTracker.Controllers
             }
             return RedirectToAction("ManageProjectUsers");
         }
-        
+
+        //GET: Tickets/Assign
+        [Authorize(Roles = "Admin,Demo_Admin")]
+        public ActionResult AssignTicket(int? id)
+        {
+            UserRolesHelper helper = new UserRolesHelper();
+            var ticket = db.Tickets.Find(id);
+            var users = helper.UsersInRole("Developer").ToList().Union(helper.UsersInRole("Demo_Developer").ToList());
+            ViewBag.AssignedToUserId = new SelectList(users, "Id", "FullName");
+            ViewBag.Tickets = new SelectList(db.Tickets, "Id", "Title");
+            
+            return View(ticket);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AssignTicket(Ticket model)
+        {
+            var ticket = db.Tickets.Find(model.Id);
+            ticket.AssignedToUserId = model.AssignedToUserId;
+            db.SaveChanges();
+            var callbackUrl = Url.Action("Details", "Tickets", new { id = ticket.Id },
+             protocol: Request.Url.Scheme);
+            try
+            {
+                EmailService ems = new EmailService();
+                IdentityMessage msg = new IdentityMessage();
+                ApplicationUser user = db.Users.Find(model.AssignedToUserId);
+                msg.Body = "You have been assigned a new Ticket." + Environment.NewLine +
+                "Please click the following link to view the details  " +
+                "<a href=\"" + callbackUrl + "\">NEW TICKET</a>";
+                msg.Destination = user.Email;
+                msg.Subject = "Invite to Household";
+                await ems.SendMailAsync(msg);
+            }
+            catch (Exception ex)
+            {
+                await Task.FromResult(0);
+            }
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult EditUser(string id)
         {

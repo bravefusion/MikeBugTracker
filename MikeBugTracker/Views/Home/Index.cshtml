@@ -40,21 +40,44 @@
                     <a href=@Url.Action("Index","Tickets") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+            @if (User.IsInRole("Admin") || User.IsInRole("Demo_Admin"))
+            {
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                        <p>Create Tickets</p>
+                            <p>Assign Tickets</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href=@Url.Action("AssignTicket", "Admin") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href=@Url.Action("Create", "Tickets") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
+            }
+
+            <!-- ./col -->
+            @if (User.IsInRole("Submitter") || User.IsInRole("Demo_Submitter"))
+            {
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                            <p>Create Tickets</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href=@Url.Action("Create", "Tickets") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            }
+
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
@@ -82,7 +105,7 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="@Url.Action("Contact","Home") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href=@Url.Action("Contact","Home") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
