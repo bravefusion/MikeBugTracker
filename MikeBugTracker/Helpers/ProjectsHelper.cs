@@ -73,6 +73,12 @@ namespace MikeBugTracker.Helpers
         public ICollection<ApplicationUser> UsersNotOnProject(int projectId)
         {
             return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
-        }       
+        }
+
+        public ICollection<Project> ListAllProjects()
+        {
+            var user = db.Projects.ToList();
+            return user;
+        }
     }
 }

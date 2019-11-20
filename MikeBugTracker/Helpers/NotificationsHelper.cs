@@ -14,7 +14,7 @@ namespace MikeBugTracker.Helpers
         {
             var ticketHasBeenAssigned = oldTicket.AssignedToUserId == null && newTicket.AssignedToUser != null;
             var ticketHasBeenUnassigned = oldTicket.AssignedToUserId != null && newTicket.AssignedToUserId == null;
-            var ticketHasBeenReassigned = oldTicket.AssignedToUserId != null && newTicket.AssignedToUserId == null;
+            var ticketHasBeenReassigned = oldTicket.AssignedToUserId != null && newTicket.AssignedToUserId != null && oldTicket.AssignedToUserId != newTicket.AssignedToUserId;
 
             if (ticketHasBeenAssigned)
             {
@@ -36,7 +36,9 @@ namespace MikeBugTracker.Helpers
             var notification = new TicketNotification
             {
                 TicketId = newTicket.Id,
-                Unread = false,
+                Unread = true,
+                SenderId = HttpContext.Current.User.Identity.GetUserId(),
+                Created = DateTime.Now,
                 RecipientId = newTicket.AssignedToUserId,
                 Body = $"You have been assigned to a ticket Id {newTicket.Id} on project {newTicket.Project.Name}. The ticket title is {newTicket.Title}."
             };
@@ -48,11 +50,13 @@ namespace MikeBugTracker.Helpers
             var notification = new TicketNotification
             {
                 TicketId = newTicket.Id,
-                Unread = false,
+                Unread = true,
+                SenderId = HttpContext.Current.User.Identity.GetUserId(),
+                Created = DateTime.Now,
                 RecipientId = newTicket.AssignedToUserId,
                 Body = $"You have been assigned to a ticket Id {newTicket.Id} on project {newTicket.Project.Name}. The ticket title is {newTicket.Title}."
             };
-            db.TicketNotifications.Remove(notification);
+            db.TicketNotifications.Add(notification);
             db.SaveChanges();
 
         }
@@ -60,7 +64,8 @@ namespace MikeBugTracker.Helpers
         public static List<TicketNotification> GetUnreadNotifications()
         {
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            return db.TicketNotifications.Include("Sender").Include("Recipient").Where(t => t.RecipientId == currentUserId && !t.Unread).ToList();
+            var notifications = db.TicketNotifications.Include("Sender").Where(t => t.RecipientId == currentUserId && t.Unread).ToList();
+            return notifications;
         }
     }
 }

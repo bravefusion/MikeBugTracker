@@ -61,6 +61,10 @@ namespace MikeBugTracker.Helpers
 
             return resultList;
         }
-
+        public ICollection<ApplicationUser> ListAllUsers()
+        {
+            var user = db.Users.ToList();
+            return user;
+        }
     }
 }

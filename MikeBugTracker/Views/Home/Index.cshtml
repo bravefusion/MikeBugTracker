@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<MikeBugTracker.Models.IndexViewModel>
+@using MikeBugTracker.Helpers
 @{
     ViewBag.Title = "Home Page";
+    var userHelper = new UserRolesHelper();
 }
 <!--Morris Chart reference-->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
@@ -50,7 +52,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>3<sup style="font-size: 20px">%</sup></h3>
 
                             <p>Assign Tickets</p>
                         </div>
@@ -66,7 +68,8 @@
     <!-- small box -->
     <div class="small-box bg-success">
         <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            @*<h3>53<sup style="font-size: 20px">%</sup></h3>*@
+           <h3><i class="fa fa-ticket-alt"> </i></h3> 
 
             <p>Create Tickets</p>
         </div>
@@ -74,8 +77,8 @@
             <i class="ion ion-stats-bars"></i>
         </div>
         <a href=@Url.Action("Create", "Tickets") class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-    </div>
-</div>
+     </div>
+     </div>
             }
             
 
@@ -99,7 +102,15 @@
                 <!-- small box -->
                 <div class="small-box bg-fuchsia">
                     <div class="inner">
-                        <h3>65</h3>
+                        @if (userHelper.ListAllUsers().Count() == 0)
+                        {
+                            <h3>0</h3>
+                        }
+                        else
+                        {
+                        <h3>@userHelper.ListAllUsers().Count()</h3>
+                        }
+
 
                         <p>Users</p>
                     </div>
@@ -295,17 +306,17 @@
 </section>
 <!-- /.content -->
 @section scripts {
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
     <script>
 
         $(function () {
             var url = '@Url.Action("ProduceChart1Data", "Graphing")';
-            $.post(url).then(function (repsonse) {
+            $.post(url).then(function (response) {
                 new Morris.Bar({
                     element: 'demoChart1',
                     data: response,
@@ -316,7 +327,7 @@
                 });
             });
             var url = '@Url.Action("ProduceChart2Data", "Graphing")';
-            $.post(url).then(function (repsonse) {
+            $.post(url).then(function (response) {
                 new Morris.Donut({
                     element: 'demoChart2',
                     data: response,

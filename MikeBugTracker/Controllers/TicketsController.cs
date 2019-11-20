@@ -19,6 +19,7 @@ namespace MikeBugTracker.Controllers
         private TicketHistoryHelper historyHelper = new TicketHistoryHelper();
         private UserRolesHelper userRoles = new UserRolesHelper();
         private ProjectsHelper userProjectsHelper = new ProjectsHelper();
+        private NotificationsHelper notifyHelp = new NotificationsHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -43,35 +44,38 @@ namespace MikeBugTracker.Controllers
 
         //GET: Tickets/Assign
         [Authorize(Roles = "Admin,Demo_Admin")]
-        public ActionResult AssignTicket(int? id)
+        public ActionResult AssignTicket()
         {
             UserRolesHelper helper = new UserRolesHelper();
-            var ticket = db.Tickets.Find(id);
+            //var ticket = db.Tickets.Find(id);
             var users = helper.UsersInRole("Developer").ToList().Union(helper.UsersInRole("Demo_Developer").ToList());
             ViewBag.AssignedToUserId = new SelectList(users, "Id", "FullName");
             ViewBag.Tickets = new SelectList(db.Tickets, "Id", "Title");
 
-            return View(ticket);
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AssignTicket(Ticket model)
+        public async Task<ActionResult> AssignTicket(int tickets, string AssignedToUserId)
         {
-            var ticket = db.Tickets.Find(model.Id);
-            ticket.AssignedToUserId = model.AssignedToUserId;
+            var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == tickets);
+            var ticket = db.Tickets.Find(tickets);
+            ticket.AssignedToUserId = AssignedToUserId;
             db.SaveChanges();
+            var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == tickets);
+            notifyHelp.ManageNotifications(oldTicket, newTicket);
             var callbackUrl = Url.Action("Details", "Tickets", new { id = ticket.Id },
              protocol: Request.Url.Scheme);
             try
             {
                 EmailService ems = new EmailService();
                 IdentityMessage msg = new IdentityMessage();
-                ApplicationUser user = db.Users.Find(model.AssignedToUserId);
+                ApplicationUser user = db.Users.Find(ticket.AssignedToUserId);
                 msg.Body = "You have been assigned a new Ticket." + Environment.NewLine +
                 "Please click the following link to view the details  " +
                 "<a href=\"" + callbackUrl + "\">NEW TICKET</a>";
                 msg.Destination = user.Email;
-                msg.Subject = "Invite to Household";
+                msg.Subject = "New Ticket Assignment";
                 await ems.SendMailAsync(msg);
             }
             catch (Exception ex)
@@ -95,7 +99,7 @@ namespace MikeBugTracker.Controllers
             }
             return View(ticket);
         }
-        [Authorize(Roles = "Submitter")]
+        [Authorize(Roles = "Submitter,Demo_Submitter")]
         // GET: Tickets/Create
         public ActionResult Create()
         {

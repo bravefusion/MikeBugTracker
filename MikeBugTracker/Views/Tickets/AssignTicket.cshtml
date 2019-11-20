@@ -28,7 +28,7 @@
 <h2>AssignTicket</h2>
 
 @using (Html.BeginForm())
-{
+{    
     @Html.AntiForgeryToken();
     <h4>Choose Ticket</h4>
     @Html.DropDownList("Tickets", null, "--SELECT--", new { @class = "form-control" })

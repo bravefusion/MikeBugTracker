@@ -183,5 +183,11 @@ namespace MikeBugTracker.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ICollection<Project> ListAllProjects()
+        {
+            var user = db.Projects.ToList();
+            return user;
+        }
     }
 }
