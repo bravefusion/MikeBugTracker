@@ -340,7 +340,7 @@
     <Content Include="Views\Account\DemoUsers.cshtml" />
     <Content Include="Views\Seed\Run.cshtml" />
     <None Include="Properties\PublishProfiles\MikeBugTracker - Web Deploy.pubxml" />
-    <Content Include="Views\Admin\AssignTicket.cshtml" />
+    <Content Include="Views\Tickets\AssignTicket.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

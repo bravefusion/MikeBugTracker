@@ -28,11 +28,23 @@ namespace MikeBugTracker.Models
         }
     }
 
+    public class ManageUsersViewModel
+    {
+        public string UserId { get; set; }
+        public string Avatar { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
+        public virtual ApplicationUser User { get; set; }
+    }
+
+   
     public class UserProfileViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
+        
     }
 
     public class ManageLoginsViewModel
@@ -104,4 +116,5 @@ namespace MikeBugTracker.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
 }

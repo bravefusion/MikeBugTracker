@@ -75,7 +75,7 @@
                         <span class="badge badge-warning navbar-badge">@NotificationsHelper.GetUnreadNotifications().Count()</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <span class="dropdown-item dropdown-header">Notifications</span>
                         @foreach (var unreadNotification in NotificationsHelper.GetUnreadNotifications())
                         {
                             @Html.BeginForm("Dismiss", "TicketNotifications", FormMethod.Get)

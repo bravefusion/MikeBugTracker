@@ -15,8 +15,11 @@
             @Html.DisplayNameFor(model => model.Ticket.OwnerUserId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
+            @Html.DisplayNameFor(model => model.Sender.FullName)
         </th>
+        <td>
+            @Html.DisplayNameFor(model => model.Recipient.FullName)
+        </td>
         <th>
             @Html.DisplayNameFor(model => model.Body)
         </th>
@@ -27,25 +30,28 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ticket.OwnerUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Unread)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Ticket.OwnerUserId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SenderId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RecipientId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Body)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Unread)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
 }
 
 </table>

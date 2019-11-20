@@ -29,6 +29,7 @@ namespace MikeBugTracker.Models
                 return $"{FirstName},{LastName}";
             } 
         }
+
         public virtual ICollection<TicketComments> TicketComments { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<TicketAttachment> TicketAttachments { get; set; }

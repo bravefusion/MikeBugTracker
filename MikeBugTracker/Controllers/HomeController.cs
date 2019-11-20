@@ -26,10 +26,26 @@ namespace MikeBugTracker.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ManageUsers()
         {
-            ViewBag.Message = "Your contact page.";
+            var users = new List<ManageUsersViewModel>();
+            foreach (var user in db.Users.ToList())
+            {
+                users.Add(new ManageUsersViewModel
+                {
+                    FullName = $"{user.LastName}, {user.FirstName}",
+                    Email = user.Email,
+                    Role = rolesHelper.ListUserRoles(user.Id).FirstOrDefault(),
+                    Avatar = user.Avatar
+                });
+            }
+            return View(users);
+        }
 
+
+        //Get
+        public ActionResult Contact()
+        { 
             return View();
         }
     }
