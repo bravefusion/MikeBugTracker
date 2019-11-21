@@ -186,7 +186,8 @@ namespace MikeBugTracker.Controllers
                     LastName = model.LastName,
                     UserName = model.Email, 
                     Email = model.Email ,
-                    DisplayName = $"{model.FirstName} {model.LastName}"
+                    DisplayName = $"{model.FirstName} {model.LastName}",
+                    Avatar = "/Uploads/mikej2.jpg"
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

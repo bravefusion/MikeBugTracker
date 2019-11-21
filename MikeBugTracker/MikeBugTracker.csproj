@@ -216,6 +216,7 @@
     <Content Include="Content\adminlte.min.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\favicon-32x32.png" />
     <Content Include="Content\icheck-bootstrap.min.css" />
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
@@ -246,6 +247,7 @@
     <Content Include="Scripts\tempusdominus-bootstrap-4.min.js" />
     <Content Include="Uploads\csharp.png" />
     <Content Include="Uploads\Fake Portfolio pic.jpg" />
+    <Content Include="Uploads\kingdomhearts.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
