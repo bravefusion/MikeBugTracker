@@ -78,9 +78,11 @@ namespace MikeBugTracker.Controllers
             return View(model);
         }
 
-        public ActionResult EditProfile()
+        public ActionResult EditProfile(string id)
         {
-            var userId = User.Identity.GetUserId();
+
+            var userId = string.IsNullOrEmpty(id) ? User.Identity.GetUserId() : id;
+
             var user = db.Users.Find(userId);
             var userVM = new UserProfileViewModel();
             userVM.FirstName = user.FirstName;
@@ -88,6 +90,7 @@ namespace MikeBugTracker.Controllers
             userVM.Avatar = user.Avatar;
             return View(userVM);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

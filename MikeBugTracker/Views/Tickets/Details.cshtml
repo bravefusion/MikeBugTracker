@@ -99,18 +99,18 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
-                                            @comment.CommentBody 
+                                            @comment.CommentBody
                                         </p>
                                         <p>
                                             <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
                                         </p>
-                                        
+
                                     </div>
                                 }
 
-                                </div>
                             </div>
                         </div>
+                    </div>
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                         <h3 class="text-primary"><i class="fas fa-paint-brush"></i> @Html.DisplayFor(model => model.Title)</h3>
                         <p class="text-muted">@Html.DisplayFor(model => model.Description)</p>
@@ -138,7 +138,7 @@
 
                                     @foreach (var Attach in Model.TicketAttachments)
                                     {
-                                        
+
                                         <a href=@Url.Content(Attach.FilePath) target="_blank">@Attach.FilePath.Split('/')[2]</a>
                                     }
                                 </li>
@@ -150,22 +150,84 @@
                                 <button type="submit" class="btn btn-sm btn-primary">Add File</button>
                             </div>
                         }
-                        <div class="text-center mt-5 mb-3">                            
-                            <a href=@Url.Action("Index","TicketHistories") class="btn btn-sm btn-warning">Ticket History</a>
-                        </div>
-                    </div>
+                        
                     </div>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
         <p>
             @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
             @Html.ActionLink("Back to List", "Index")
 
         </p>
-        </section>
-        <!-- /.content -->     
-    
+    </section>
+    <!-- /.content -->
 
- </div>
+
+</div>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Ticket History</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <!-- Timelime example  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- The time line -->
+                        <div class="timeline">
+                            <!-- timeline time label -->
+                            <div class="time-label">
+                                <span class="bg-red">Most Recent</span>
+                            </div>
+                            <!-- /.timeline-label -->
+                            <!-- timeline item -->
+
+                            @foreach (var item in Model.TicketHistory)
+                            {
+                                <!-- timeline item -->
+                                <div>
+                                    <i class="fas fa-list bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i></span>
+                                        <h3 class="timeline-header"><a href="#">@item.Property</a> @item.User.DisplayName</h3>
+
+                                        <div class="timeline-body">
+                                            @item.OldValue  =>  @item.NewValue
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-sm">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END timeline item -->
+                            }
+
+
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+            <!-- /.timeline -->
+            </div>
+        </div>
+
+</section>
+<!-- /.content -->
+  

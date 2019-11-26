@@ -245,9 +245,14 @@
     <Content Include="Scripts\sparkline.js" />
     <Content Include="Scripts\summernote-bs4.min.js" />
     <Content Include="Scripts\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Uploads\Blog Pic temp.jpg" />
     <Content Include="Uploads\csharp.png" />
     <Content Include="Uploads\Fake Portfolio pic.jpg" />
+    <Content Include="Uploads\jhowse.jpg" />
     <Content Include="Uploads\kingdomhearts.jpg" />
+    <Content Include="Uploads\mikej.jpg" />
+    <Content Include="Uploads\mikej2.jpg" />
+    <Content Include="Uploads\tempprof.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
