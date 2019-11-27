@@ -33,6 +33,12 @@
     <link href="~/Content/adminlte.min.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .newstyle {
+           
+            
+        }
+    </style>
 </head>
 <body>
     <!-- Content Wrapper. Contains page content -->
@@ -53,13 +59,13 @@
         </div><!-- /.container-fluid -->
         
 
-        <div class="col-md-6">
-            <div class="card" style="left: 50%; margin-top: 150px">
+        <div class="col-md-8">
+            <div class="card newstyle" style="left: 25%; margin-top: 100px;">
                 <div class="card-header">
                     <h3 class="card-title"></h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body embed-responsive">
                     <div class="row">
                         <div class="container-fluid">
                             <div class="row">
@@ -70,14 +76,14 @@
                                         @Html.Hidden("emailKey", "DemoAdminEmail")
 
                                         <!-- Widget: user widget style 1 -->
-                                        <div class="card card-widget widget-user">
+                                        <div class="card card-widget widget-user embed-responsive">
                                             <!-- Add the bg color to the header using any of the bg-* classes -->
-                                            <div class="widget-user-header bg-info">
+                                            <div class="widget-user-header bg-info yo-yo">
                                                 <h3 class="widget-user-username">Demo Admin</h3>
                                                 <h5 class="widget-user-desc">Able to create projects and assign roles</h5>
                                             </div>
-                                            <div class="widget-user-image">
-                                                <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
+                                            <div class="widget-user-image ">
+                                                <img class="img-circle elevation-1" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row">
@@ -107,7 +113,7 @@
                                         <!-- Widget: user widget style 1 -->
                                         <div class="card card-widget widget-user">
                                             <!-- Add the bg color to the header using any of the bg-* classes -->
-                                            <div class="widget-user-header bg-info">
+                                            <div class="widget-user-header bg-info yo-yo">
                                                 <h3 class="widget-user-username">Demo Project Manager</h3>
                                                 <h5 class="widget-user-desc">Able to see assigned projects/add Devs</h5>
                                             </div>
@@ -142,7 +148,7 @@
                                             <!-- Widget: user widget style 1 -->
                                             <div class="card card-widget widget-user">
                                                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                                                <div class="widget-user-header bg-info">
+                                                <div class="widget-user-header bg-info yo-yo">
                                                     <h3 class="widget-user-username">Demo Developer</h3>
                                                     <h5 class="widget-user-desc">Able to see assigned projects/tickets</h5>
                                                 </div>
@@ -175,7 +181,7 @@
                                             <!-- Widget: user widget style 1 -->
                                             <div class="card card-widget widget-user">
                                                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                                                <div class="widget-user-header bg-info">
+                                                <div class="widget-user-header bg-info yo-yo">
                                                     <h3 class="widget-user-username">Demo Submitter</h3>
                                                     <h5 class="widget-user-desc">Able to see created tickets</h5>
                                                 </div>
