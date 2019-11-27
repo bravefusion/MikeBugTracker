@@ -82,7 +82,6 @@ namespace MikeBugTracker.Controllers
         {
 
             var userId = string.IsNullOrEmpty(id) ? User.Identity.GetUserId() : id;
-
             var user = db.Users.Find(userId);
             var userVM = new UserProfileViewModel();
             userVM.FirstName = user.FirstName;
