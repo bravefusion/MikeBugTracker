@@ -45,154 +45,171 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#"></a></li>
-                        <li class="breadcrumb-item active"></li>
+                        @*<li class="breadcrumb-item"></li>
+                        <li class="breadcrumb-item active"></li>*@
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-    
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("emailKey", "DemoAdminEmail")
+        
 
-                    <!-- Widget: user widget style 1 -->
-                    <div class="card card-widget widget-user">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-info">
-                            <h3 class="widget-user-username">Demo Admin</h3>
-                            <h5 class="widget-user-desc">Able to create projects and assign roles</h5>
-                        </div>
-                        <div class="widget-user-image">                            
-                            <img  class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg"  alt="User Avatar"/>
-                        </div>
-                        <div class="card-footer">
+        <div class="col-md-6">
+            <div class="card" style="left: 50%; margin-top: 150px">
+                <div class="card-header">
+                    <h3 class="card-title"></h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="container-fluid">
                             <div class="row">
-                                <!-- /.col -->
-                                <div class="col-sm-12">
-                                    <div class="description-block">
-                                        <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
-                                    </div>
-                                    <!-- /.description-block -->
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("emailKey", "DemoAdminEmail")
+
+                                        <!-- Widget: user widget style 1 -->
+                                        <div class="card card-widget widget-user">
+                                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                                            <div class="widget-user-header bg-info">
+                                                <h3 class="widget-user-username">Demo Admin</h3>
+                                                <h5 class="widget-user-desc">Able to create projects and assign roles</h5>
+                                            </div>
+                                            <div class="widget-user-image">
+                                                <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <!-- /.col -->
+                                                    <div class="col-sm-12">
+                                                        <div class="description-block">
+                                                            <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                                                        </div>
+                                                        <!-- /.description-block -->
+                                                    </div>
+                                                    <!-- /.col -->
+                                                    <!-- /.col -->
+                                                </div>
+                                                <!-- /.row -->
+                                            </div>
+                                        </div>
+                                        <!-- /.widget-user -->
+                                    }
                                 </div>
-                                <!-- /.col -->
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
+                                
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("emailKey", "DemoPMEmail")
+
+                                        <!-- Widget: user widget style 1 -->
+                                        <div class="card card-widget widget-user">
+                                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                                            <div class="widget-user-header bg-info">
+                                                <h3 class="widget-user-username">Demo Project Manager</h3>
+                                                <h5 class="widget-user-desc">Able to see assigned projects/add Devs</h5>
+                                            </div>
+                                            <div class="widget-user-image">
+                                                <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <!-- /.col -->
+                                                    <div class="col-sm-12">
+                                                        <div class="description-block">
+                                                            <h5 class="description-header"></h5>
+                                                            <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                                                        </div>
+                                                        <!-- /.description-block -->
+                                                    </div>
+                                                </div>
+                                                <!-- /.row -->
+                                            </div>
+                                        </div>
+                                        <!-- /.widget-user -->
+                                    }
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("emailKey", "DemoDeveloperEmail")
+
+                                            <!-- Widget: user widget style 1 -->
+                                            <div class="card card-widget widget-user">
+                                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                                <div class="widget-user-header bg-info">
+                                                    <h3 class="widget-user-username">Demo Developer</h3>
+                                                    <h5 class="widget-user-desc">Able to see assigned projects/tickets</h5>
+                                                </div>
+                                                <div class="widget-user-image">
+                                                    <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row">
+                                                        <!-- /.col -->
+                                                        <div class="col-sm-12">
+                                                            <div class="description-block">
+                                                                <h5 class="description-header"></h5>
+                                                                <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                                                            </div>
+                                                            <!-- /.description-block -->
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.row -->
+                                                </div>
+                                            </div>
+                                            <!-- /.widget-user -->
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("emailKey", "DemoSubmitterEmail")
+
+                                            <!-- Widget: user widget style 1 -->
+                                            <div class="card card-widget widget-user">
+                                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                                <div class="widget-user-header bg-info">
+                                                    <h3 class="widget-user-username">Demo Submitter</h3>
+                                                    <h5 class="widget-user-desc">Able to see created tickets</h5>
+                                                </div>
+                                                <div class="widget-user-image">
+                                                    <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row">
+                                                        <!-- /.col -->
+                                                        <div class="col-sm-12">
+                                                            <div class="description-block">
+                                                                <h5 class="description-header"></h5>
+                                                                <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
+                                                            </div>
+                                                            <!-- /.description-block -->
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.row -->
+                                                </div>
+                                            </div>
+                                            <!-- /.widget-user -->
+                                        }
+                                    </div>
+                                </div>
+                                
+                            
                         </div>
                     </div>
-                    <!-- /.widget-user -->
-                }
-            </div>
-            <div class="col-md-3">
-                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("emailKey", "DemoPMEmail")
-
-                    <!-- Widget: user widget style 1 -->
-                    <div class="card card-widget widget-user">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-info">
-                            <h3 class="widget-user-username">Demo Project Manager</h3>
-                            <h5 class="widget-user-desc">Able to see assigned projects/add Devs</h5>
-                        </div>
-                        <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-sm-12">
-                                    <div class="description-block">
-                                        <h5 class="description-header"></h5>
-                                        <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </div>
                     </div>
-                    <!-- /.widget-user -->
-                }
+                </div>
             </div>
-            <div class="col-md-3">
-                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("emailKey", "DemoDeveloperEmail")
 
-                    <!-- Widget: user widget style 1 -->
-                    <div class="card card-widget widget-user">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-info">
-                            <h3 class="widget-user-username">Demo Developer</h3>
-                            <h5 class="widget-user-desc">Able to see assigned projects/tickets</h5>
-                        </div>
-                        <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-sm-12">
-                                    <div class="description-block">
-                                        <h5 class="description-header"></h5>
-                                        <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                    </div>
-                    <!-- /.widget-user -->
-                }
-            </div>
-            <div class="col-md-3">
-                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("emailKey", "DemoSubmitterEmail")
 
-                    <!-- Widget: user widget style 1 -->
-                    <div class="card card-widget widget-user">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-info">
-                            <h3 class="widget-user-username">Demo Submitter</h3>
-                            <h5 class="widget-user-desc">Able to see created tickets</h5>
-                        </div>
-                        <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="~/Uploads/kingdomhearts.jpg" alt="User Avatar" />
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-sm-12">
-                                    <div class="description-block">
-                                        <h5 class="description-header"></h5>
-                                        <button type="submit" class="btn btn-sm btn-primary"><span class="description-text">Enter</span></button>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                    </div>
-                    <!-- /.widget-user -->
-                }
-            </div>
-        </div>
-    </div>
 </div>
-
-
-
 </body>
 </html>
 

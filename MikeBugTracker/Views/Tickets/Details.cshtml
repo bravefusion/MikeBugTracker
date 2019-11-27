@@ -71,16 +71,16 @@
                                             @Html.AntiForgeryToken()
                                             @Html.Hidden("TicketId", Model.Id)
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="col-lg">
-                                                        @Html.TextArea("CommentBody", new { rows = 5, cols = 50, placeholder = "Add Comment" })
+                                                        @Html.TextArea("CommentBody", new { @class="form-control", rows = 5, cols = 25, placeholder = "Add Comment" })
                                                     </div>
                                                 </div>
 
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg">
-                                                    <button type="submit" class="btn btn-sm btn-primary">Add Comment</button>
+                                                    <button type="submit" class="btn btn-sm btn-primary" style="margin-top: 10px">Add Comment</button>
                                                 </div>
                                             </div>
                                         }
@@ -144,10 +144,10 @@
                                 </li>
 
                             </ul>
-                            <div class="text-center mt-5 mb-3">
+                            <div class="mt-5 mb-3">
                                 <input type="file" name="image" class="form-control" />
                                 @Html.ValidationMessage("Attach.Filepath", "", new { @class = "text-danger" })
-                                <button type="submit" class="btn btn-sm btn-primary">Add File</button>
+                                <button type="submit" class="btn btn-sm btn-primary" style="margin-top: 10px">Add File</button>
                             </div>
                         }
                         
@@ -208,10 +208,10 @@
                                         <h3 class="timeline-header"><a href="#">@item.Property</a> @item.User.DisplayName</h3>
 
                                         <div class="timeline-body">
-                                            @item.OldValue  =>  @item.NewValue
+                                           @item.Property was changed from <strong>@item.OldValue</strong> to <strong>@item.NewValue</strong> 
                                         </div>
                                         <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-sm">Read more</a>
+                                            <a class="btn btn-primary btn-sm disabled">Read more</a>
                                         </div>
                                     </div>
                                 </div>
